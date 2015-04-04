@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity" 
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:id="@+id/lltop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/inspect_list_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:focusableInTouchMode="true" 
+            android:focusable="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="taskid142815096675669381000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/inspect_list_customer_item_name"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/inspect_list_item_customer_name"
+            android:textColor="#ff0000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/inspect_list_item_customer_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/inspect_list_item_customer_inspect_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="@string/inspect_list_item_inspect_date"
+            android:textStyle="bold"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/inspect_list_item_customer_inspect_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rladdress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lltop"
+        android:paddingLeft="30dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/inspect_list_item_customer_address_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/inspect_list_item_address_title"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/inspect_list_item_customer_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/inspect_list_item_customer_address_title"
+            android:gravity="center_vertical"
+            android:ellipsize="end"
+            android:lines="3"
+            android:maxLines="3"
+            android:text="啊；连锁店就发生了；附件是辣的房间里萨；的减肥了撒；点击发送；阿里的房间萨拉；打飞机啊代理商；附件萨拉；对方就撒旦了；解放路撒的减肥了撒的减肥了；撒的减肥了；撒旦福建省；拉大房间爱丽丝；的减肥了；撒旦就发代理商；就发了啥；的减肥拉动是"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <Button 
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:id="@+id/inspect_camera"
+        android:text="@string/inspect_camera"
+        android:textSize="10sp"
+        android:layout_below="@id/rladdress"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        />
+</RelativeLayout>

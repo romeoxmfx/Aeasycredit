@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AeasycreditOrder</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_title_en">aEasy Credit</string>
+    <string name="login_title_zh">亚馨信贷</string>
+    <string name="login_name">name</string>
+    <string name="login_password">password</string>
+    <string name="login_ok">login</string>
+    <string name="dashboard_example_home_btn_analytics">analytics</string>
+    <string name="inspect_list_item_customer_name">、customer name:</string>
+    <string name="inspect_list_item_inspect_date">inspect date:</string>
+    <string name="inspect_list_item_address_title">address:</string>
+    <string name="inspect_camera">camera</string>
+    <string name="inspect_task">inspect task</string>
+    
+    <string name="inspect_task_detail">inspect detail</string>
+    <string name="inspect_task_detail_num">num：</string>
+    <string name="inspect_task_detail_customer_name">customer name:</string>
+    <string name="inspect_task_detail_customer_phone">customer phone:</string>
+    <string name="inspect_task_detail_customer_address">inspect address:</string>
+    <string name="inspect_task_detail_customer_contacts">contacts:</string>
+    <string name="inspect_task_detail_customer_contacts_phone">contacts phone:</string>
+    <string name="inspect_task_detail_customer_inspect_person">inspect person:</string>
+    <string name="inspect_task_detail_customer_inspect_predate">inspect date:</string>
+    <string name="inspect_task_detail_customer_inspect_remark">remark:</string>
+    <string name="inspect_task_detail_customer_inspect_perceive_report">write perceive report</string>
+    <string name="inspect_task_detail_customer_inspect_secret_report">write secret report</string>
+    <string name="inspect_login_input_error">please input name and password</string>
+    <string name="inspect_login_success">login success</string>
+    <string name="inspect_login_fail">login fail</string>
+    <string name="inspect_checklogin_fail">check login fail</string>
+    <string name="inspect_checklogin_success">check login success</string>
+    <string name="inspect_checklogin_fail_timeout">check login fail,please login again</string>
+    <string name="inspect_tasklist_request_success">request list success</string>
+    <string name="inspect_tasklist_request_fail">request list fail</string>
+    <string name="inspect_taskdetail_fail">no data</string>
+
+    <color name="main_back">#ef8122</color>
+    <color name="main_back_mask">#7fef8122</color>
+    <color name="main_title_background">#d06f00</color>
+    <color name="main_dashboard_color">#7d3c24</color>
+    
+    
+</resources>

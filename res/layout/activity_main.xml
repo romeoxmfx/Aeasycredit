@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity" 
+    android:descendantFocusability="blocksDescendants">
+
+    <GridView
+       android:id="@+id/dashboard_grid"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:listSelector="@android:color/transparent"
+       android:stretchMode="columnWidth"
+       android:verticalSpacing="20.0dip"
+       android:layout_centerInParent="true"
+       style="@style/dashboard" />
+
+</RelativeLayout>
