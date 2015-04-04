@@ -282,7 +282,7 @@
             android:textSize="13sp" />
 
         <Button
-            android:id="@+id/inspect_task_detail_inspect_secret_report"
+            android:id="@+id/inspect_detail_inspect_secret_report"
             android:layout_width="128dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"

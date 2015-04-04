@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InspectTaskDetail extends BaseActivity implements OnClickListener{
+public class InspectTaskDetail extends BaseActivity implements OnClickListener {
     TextView tvNum;
     TextView tvCustomerName;
     TextView tvCustomerPhone;
@@ -30,7 +30,7 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener{
     Button btPerceiveReport;
     Button btSecretReport;
     private Task task;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +50,21 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener{
         tvDate = (TextView) findViewById(R.id.inspect_detail_inspect_predate);
         tvRemak = (TextView) findViewById(R.id.inspect_task_detail_inspect_remark);
         btPerceiveReport = (Button) findViewById(R.id.inspect_detail_inspect_perceive_report);
-        btSecretReport = (Button) findViewById(R.id.inspect_task_detail_inspect_secret_report);
+        btSecretReport = (Button) findViewById(R.id.inspect_detail_inspect_secret_report);
         btPerceiveReport.setOnClickListener(this);
         btSecretReport.setOnClickListener(this);
-        
+
         receiveDetail(getIntent());
     }
-    
-    private void receiveDetail(Intent intent){
-        if(intent.getExtras() != null && intent.getExtras().containsKey(AeaConstants.EXTRA_TASK)){
+
+    private void receiveDetail(Intent intent) {
+        if (intent.getExtras() != null && intent.getExtras().containsKey(AeaConstants.EXTRA_TASK)) {
             String json = intent.getExtras().getString(AeaConstants.EXTRA_TASK);
             task = new Gson().fromJson(json, Task.class);
             bindData();
-        }else{
-            Toast.makeText(this, getResources().getString(R.string.inspect_taskdetail_fail), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.inspect_taskdetail_fail),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -71,9 +72,11 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener{
         tvNum.setText(task.getLoanBillNumber());
         tvCustomerName.setText(task.getClientName());
         tvCustomerPhone.setText(task.getClientPhone());
-        tvAddress.setText(task.getInvestigateAddr());;
+        tvAddress.setText(task.getInvestigateAddr());
+        ;
         tvContact.setText(task.getContactName());
-        tvContackPhone.setText(task.getContactPhone());;
+        tvContackPhone.setText(task.getContactPhone());
+        ;
         tvInspectPerson.setText(task.getInvestigateName());
         tvDate.setText(task.getAppointInvestigateTime());
         tvRemak.setText(task.getRemarks());
@@ -81,17 +84,37 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener{
 
     @Override
     public void onResponse(RequestWrapper response) {
-        
+
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        
+
     }
 
     @Override
     public void onClick(View v) {
-        
+        int id = v.getId();
+        switch (id) {
+            case R.id.inspect_detail_inspect_perceive_report:
+                Intent intentPerceiveReport = new Intent(this, InspectReportActivity.class);
+                intentPerceiveReport.putExtra(AeaConstants.REPORT_TYPE,
+                        AeaConstants.REPORT_PERCEIVE);
+                intentPerceiveReport.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
+                intentPerceiveReport.putExtra(AeaConstants.REPORT_ADDRESS, task.getInvestigateAddr());
+                startActivity(intentPerceiveReport);
+                break;
+            case R.id.inspect_detail_inspect_secret_report:
+                Intent intentSecretReport = new Intent(this, InspectReportActivity.class);
+                intentSecretReport.putExtra(AeaConstants.REPORT_TYPE,
+                        AeaConstants.REPORT_SECRET);
+                intentSecretReport.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
+                intentSecretReport.putExtra(AeaConstants.REPORT_ADDRESS, task.getInvestigateAddr());
+                startActivity(intentSecretReport);
+                break;
+            default:
+                break;
+        }
     }
 
 }

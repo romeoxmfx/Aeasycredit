@@ -37,5 +37,35 @@
     <string name="inspect_tasklist_request_success">查询列表请求成功</string>
     <string name="inspect_tasklist_request_fail">查询列表请求失败</string>
     <string name="inspect_taskdetail_fail">没有详情数据</string>
+    
+    <string name="inspect_report_secert">新增暗访报告</string>
+    <string name="inspect_report_perceive">新增明察报告</string>
+    <string name="inspect_report_finishtime">考察完成时间(*)：</string>
+    <string name="inspect_report_address">考察地址：</string>
+    <string name="inspect_report_contact">联系人(*)：</string>
+    <string name="inspect_report_contact_phone">联系人电话(*)：</string>
+    <string name="inspect_report_contact_position">联系人职位(*)：</string>
+    <string name="inspect_report_contact_company">公司名称</string>
+    <string name="inspect_report_contact_company_nature">公司性质</string>
+    <string name="inspect_report_contact_company_employee_count">员工人数</string>
+    <string name="inspect_report_contact_ground_area">营业用地面积</string>
+    <string name="inspect_report_contact_company_has_logo">是否有公司牌匾</string>
+    <string name="inspect_report_contact_company_has_name">办公区域是否有公司名称</string>
+    <string name="inspect_report_contact_company_business_content">业务内容</string>
+    <string name="inspect_report_contact_company_scale">公司规模</string>
+    <string name="inspect_report_contact_product_tool">生产器具</string>
+    <string name="inspect_report_contact_stock">存货(成品,含半成品)</string>
+    <string name="inspect_report_contact_interview_content">访谈内容</string>
+    <string name="inspect_report_contact_inspect_content">考察内容</string>
+    <string name="inspect_report_contact_inspect_summary">考察总结</string>
+    <string name="inspect_report_contact_supplement">其他补充事项</string>
+    <string name="inspect_report_contact_upload_photo">上传照片：</string>
+    <string name="inspect_report_browse">浏览</string>
+    <string name="inspect_report_submit">提交</string>
+    <string name="inspect_report_save">保存</string>
+    <string name="inspect_report_contact_person">人</string>
+    <string name="inspect_report_contact_centiare">平方米</string>
+    <string name="inspect_report_yes">是</string>
+    <string name="inspect_report_no">否</string>
 
 </resources>

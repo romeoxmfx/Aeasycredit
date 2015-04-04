@@ -21,4 +21,10 @@ public class AeaConstants {
     public static final String RESPONSE_CODE_NULL = "";
     
     public static final String EXTRA_TASK = "task";
+    
+    public static final String REPORT_TYPE = "report_type";
+    public static final String REPORT_ADDRESS = "report_address";
+    public static final String REPORT_TASK_ID = "report_task_id";
+    public static final int REPORT_SECRET = 1;
+    public static final int REPORT_PERCEIVE = 0;
 }

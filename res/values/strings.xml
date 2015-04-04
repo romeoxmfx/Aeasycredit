@@ -37,6 +37,34 @@
     <string name="inspect_tasklist_request_success">request list success</string>
     <string name="inspect_tasklist_request_fail">request list fail</string>
     <string name="inspect_taskdetail_fail">no data</string>
+    
+    <string name="inspect_report_secert">secert report</string>
+    <string name="inspect_report_perceive">perceive report</string>
+    <string name="inspect_report_finishtime">perceive finish time</string>
+    <string name="inspect_report_address">inspect address</string>
+    <string name="inspect_report_contact">inspect contact</string>
+    <string name="inspect_report_contact_phone">contact phone</string>
+    <string name="inspect_report_contact_position">contact position</string>
+    <string name="inspect_report_contact_company">contact company</string>
+    <string name="inspect_report_contact_company_nature">contact company nature</string>
+    <string name="inspect_report_contact_company_employee_count">contact company nature employee count</string>
+    <string name="inspect_report_contact_ground_area">ground area</string>
+    <string name="inspect_report_contact_company_has_logo">has company logo</string>
+    <string name="inspect_report_contact_company_has_name">has company name</string>
+    <string name="inspect_report_contact_company_business_content">company business content</string>
+    <string name="inspect_report_contact_company_scale">company scale</string>
+    <string name="inspect_report_contact_product_tool">product tool</string>
+    <string name="inspect_report_contact_stock">stock finished or unfinished</string>
+    <string name="inspect_report_contact_interview_content">interview content</string>
+    <string name="inspect_report_contact_inspect_content">inspect content</string>
+    <string name="inspect_report_contact_inspect_summary">inspect summary</string>
+    <string name="inspect_report_contact_supplement">inspect supplement things</string>
+    <string name="inspect_report_contact_upload_photo">inspect upload photo</string>
+    <string name="inspect_report_browse">browse</string>
+    <string name="inspect_report_submit">submit</string>
+    <string name="inspect_report_save">save</string>
+    <string name="inspect_report_contact_person">person</string>
+    <string name="inspect_report_contact_centiare">centiare</string>
 
     <color name="main_back">#ef8122</color>
     <color name="main_back_mask">#7fef8122</color>

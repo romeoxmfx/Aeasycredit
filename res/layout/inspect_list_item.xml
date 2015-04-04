@@ -15,16 +15,16 @@
 
         <TextView
             android:id="@+id/inspect_list_item_id"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:textColor="#ff0000"
             android:singleLine="true"
             android:maxLines="1"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:focusableInTouchMode="true" 
             android:focusable="true"
             android:marqueeRepeatLimit="marquee_forever"
-            android:text="taskid142815096675669381000"
+            android:text="1"
             android:textSize="10sp" />
 
         <TextView
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/inspect_list_item_customer_name"
             android:textColor="#ff0000"
+            android:layout_marginLeft="2dp"
             android:textSize="10sp" />
 
         <TextView
@@ -45,7 +46,7 @@
             android:id="@+id/inspect_list_item_customer_inspect_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="40dp"
             android:text="@string/inspect_list_item_inspect_date"
             android:textStyle="bold"
             android:textSize="10sp" />
@@ -63,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/lltop"
-        android:paddingLeft="30dp"
+        android:paddingLeft="20dp"
         android:layout_marginTop="10dp">
 
         <TextView

@@ -155,6 +155,13 @@ public class InspectTaskList extends BaseActivity {
                 holder.tvId.setText(task.getTaskid());
                 holder.tvInspectAddress.setText(task.getInvestigateAddr());
                 holder.tvInspectDate.setText(task.getAppointInvestigateTime());
+                holder.btCamera.setOnClickListener(new View.OnClickListener() {
+                    
+                    @Override
+                    public void onClick(View v) {
+                        
+                    }
+                });
             }
 
             return v;

@@ -1,0 +1,579 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_finishtime"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_address"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/inspect_report_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_phone"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_position"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_company_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_nature"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_company_nature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_employee_count"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_company_employee_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inspect_report_contact_person"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_ground_area"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_ground_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inspect_report_contact_centiare"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_has_logo"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <RadioGroup
+                android:id="@+id/inspect_report_contact_company_has_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:hint="@string/inspect_report_contact_centiare"
+                android:inputType="number"
+                android:maxLines="1"
+                android:orientation="horizontal"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" >
+
+                <RadioButton
+                    android:id="@+id/inspect_report_contact_company_has_logo_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_report_yes"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/inspect_report_contact_company_has_logo_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_report_no"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_has_name"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <RadioGroup
+                android:id="@+id/inspect_report_contact_company_has_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inspect_report_contact_centiare"
+                android:inputType="number"
+                android:maxLines="1"
+                android:orientation="horizontal"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" >
+
+                <RadioButton
+                    android:id="@+id/inspect_report_contact_company_has_name_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_report_yes"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/inspect_report_contact_company_has_name_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_report_no"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_business_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_company_business_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_company_business_content"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_company_scale"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_company_scale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_company_scale"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_product_tool"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_product_tool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_product_tool"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_stock"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_stock"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_interview_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_interview_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_interview_content"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_inspect_summary"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_inspect_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_inspect_summary"
+                android:lines="15"
+                android:maxLines="15"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_supplement"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_supplement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/inspect_report_contact_supplement"
+                android:lines="10"
+                android:maxLines="10"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/inspect_report_contact_upload_photo"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/inspect_report_contact_upload_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="@string/inspect_report_browse"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/inspect_report_submit"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/inspect_report_submit"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</ScrollView>
