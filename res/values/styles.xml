@@ -40,4 +40,9 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
     
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/btn_checkbox_selector</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+    
 </resources>

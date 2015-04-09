@@ -97,6 +97,20 @@ public class AeasyRequestBuilder {
         return aeasyapp;
     }
 
+    public static RequestWrapper getSubmitAeasyapp(RequestBody requestBody,String userCode,String uuid) {
+        RequestWrapper wrapper = new RequestWrapper();
+        Aeasyapp app = new AeasyRequestBuilder()
+                .setMethod(AeaConstants.METHOD_SUBMIT)
+                // .setPrivate(AeaConstants.PRIVATE_LOGIN)
+                .setRequestBody(requestBody)
+                .setUserCode(userCode)
+                .setUuid(uuid)
+                // .setSerNum("8ed5a52093c7445c956da09dd3dc1cc4")
+                .getAeasyapp();
+        wrapper.setAeasyapp(app);
+        return wrapper;
+    }
+
     public static RequestWrapper getLoginAeasyapp(RequestBody requestBody) {
 
         // RequestBody requestBody = new RequestBody();
@@ -107,7 +121,7 @@ public class AeasyRequestBuilder {
                 .setMethod(AeaConstants.METHOD_LOGIN)
                 // .setPrivate(AeaConstants.PRIVATE_LOGIN)
                 .setRequestBody(requestBody)
-                 .setUserCode(requestBody.getUsercode())
+                .setUserCode(requestBody.getUsercode())
                 // .setUuid(requestBody.getUsercode())
                 // .setSerNum("8ed5a52093c7445c956da09dd3dc1cc4")
                 .getAeasyapp();
@@ -142,7 +156,7 @@ public class AeasyRequestBuilder {
         Aeasyapp app = new AeasyRequestBuilder()
                 .setMethod(AeaConstants.METHOD_TASK_REQUEST)
                 // .setPrivate(AeaConstants.PRIVATE_CHECKOUK_LOGIN)
-//                .setRequestBody(requestBody)
+                // .setRequestBody(requestBody)
                 .setUserCode(userCode)
                 .setUuid(uuid)
                 // .setSerNum("8ed5a52093c7445c956da09dd3dc1cc4")

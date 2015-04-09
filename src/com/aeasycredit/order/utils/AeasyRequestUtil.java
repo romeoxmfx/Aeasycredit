@@ -1,9 +1,16 @@
 package com.aeasycredit.order.utils;
 
+import java.io.File;
+import java.util.List;
+
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.aeasycredit.order.models.RequestBody;
+import com.aeasycredit.order.volley.MultipartEntity;
+import com.aeasycredit.order.volley.toolbox.MultipartRequest;
 import com.google.gson.Gson;
+import com.photoselector.model.PhotoModel;
 
 public class AeasyRequestUtil {
 
@@ -27,6 +34,33 @@ public class AeasyRequestUtil {
         requestJson += new Gson().toJson(AeasyRequestBuilder.getCheckLoginAeasyapp(body));
 //        requestJson += "\"";
         return requestJson;
+    }
+    
+    public static String getSubmitRequest(RequestBody body, Context context){
+//        String requestJson = AeaConstants.POST_PAR_REQUEST+"=";
+        String requestJson = "";
+//        requestJson += "\"";
+        String userCode = AeasySharedPreferencesUtil.getUserCode(context);
+        String uuid = AeasySharedPreferencesUtil.getUuid(context);
+        requestJson += new Gson().toJson(AeasyRequestBuilder.getSubmitAeasyapp(body,userCode,uuid));
+//        requestJson += "\"";
+        return requestJson;
+    }
+    
+    public static MultipartEntity imageFileUploadEntity(String requestParams,List<PhotoModel> photos){
+        MultipartEntity multipartEntity = null;
+        try {
+            multipartEntity = new MultipartEntity();
+            multipartEntity.addStringPart(AeaConstants.POST_PAR_REQUEST, requestParams);
+            if(photos != null && photos.size() > 0){
+                for (PhotoModel photoModel : photos) {
+                    multipartEntity.addFilePart(AeaConstants.POST_PAR_PROCESSDEFFILES, new File(photoModel.getOriginalPath()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return multipartEntity;
     }
     
     public static String getTaskListRequest(String userCode,String uuid){

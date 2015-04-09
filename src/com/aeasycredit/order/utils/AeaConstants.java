@@ -6,6 +6,7 @@ public class AeaConstants {
     
     public static final String METHOD_CHECK_LOGIN = "user.checklogin";
     public static final String METHOD_LOGIN = "user.login";
+    public static final String METHOD_SUBMIT = "investigate.submit";
     public static final String METHOD_TASK_REQUEST = "investigate.querytask";
     
     public static final String PRIVATE_CHECKOUK_LOGIN = "";
@@ -13,7 +14,7 @@ public class AeaConstants {
     public static final String PRIVATE_TASK_REQUEST = "";
     
     public static final String POST_PAR_REQUEST = "request";
-    public static final String POST_PAR_PROCESSDEFFILES = "processDefFiles";
+    public static final String POST_PAR_PROCESSDEFFILES = "processDefFile";
     
     public static final String RESPONSE_CODE_600 = "600";//超时
     public static final String RESPONSE_CODE_700 = "700";//版本过低

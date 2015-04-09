@@ -8,6 +8,7 @@ import com.aeasycredit.order.application.MyApplication;
 import com.aeasycredit.order.models.Aeasyapp;
 import com.aeasycredit.order.models.RequestWrapper;
 import com.aeasycredit.order.models.Task;
+import com.aeasycredit.order.tool.AeaCamera;
 import com.aeasycredit.order.utils.AeaConstants;
 import com.aeasycredit.order.utils.AeasyRequestUtil;
 import com.aeasycredit.order.utils.AeasySharedPreferencesUtil;
@@ -149,7 +150,7 @@ public class InspectTaskList extends BaseActivity {
                 holder = (ViewHolder) v.getTag();
             }
 
-            Task task = list.get(position);
+            final Task task = list.get(position);
             if (task != null) {
                 holder.tvCustomerName.setText(task.getClientName());
                 holder.tvId.setText(task.getTaskid());
@@ -159,7 +160,8 @@ public class InspectTaskList extends BaseActivity {
                     
                     @Override
                     public void onClick(View v) {
-                        
+                        AeaCamera.getInstance().initialize(InspectTaskList.this);
+                        AeaCamera.getInstance().openCamara(task.getTaskid());
                     }
                 });
             }
@@ -214,5 +216,11 @@ public class InspectTaskList extends BaseActivity {
         stopLoadingStatus();
         Toast.makeText(this, getResources().getString(R.string.inspect_tasklist_request_fail),
                 Toast.LENGTH_SHORT).show();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 }
