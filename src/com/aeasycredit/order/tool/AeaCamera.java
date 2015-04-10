@@ -136,23 +136,25 @@ public class AeaCamera implements MediaScannerConnectionClient {
         switch (requestCode) {
             case REQUEST_TAKE_PHOTO: {
                 if (resultCode == Activity.RESULT_OK) {
-                    String filePath = Environment.getExternalStorageDirectory()
-                            + "/" + baselocalTempImgDir + "/" + openCameraTaskId;
-                    File f = new File(filePath);
-                    try {
-                        Uri u = Uri.parse(android.provider.MediaStore.Images.Media
-                                .insertImage(mContext.getContentResolver(),
-                                        f.getAbsolutePath(), null, null));
-                        try {
-                            Bitmap bm = MediaStore.Images.Media.getBitmap(
-                                    mContext.getContentResolver(), u);
-                            bm = rotateBitmap(bm, readPictureDegree(filePath));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+//                    String filePath = Environment.getExternalStorageDirectory()
+//                            + "/" + baselocalTempImgDir + "/" + openCameraTaskId;
+//                    File f = new File(filePath);
+//                    try {
+//                        Uri u = Uri.parse(android.provider.MediaStore.Images.Media
+//                                .insertImage(mContext.getContentResolver(),
+//                                        f.getAbsolutePath(), null, null));
+//                        try {
+//                            Bitmap bm = MediaStore.Images.Media.getBitmap(
+//                                    mContext.getContentResolver(), u);
+//                            bm = rotateBitmap(bm, readPictureDegree(filePath));
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+                    //继续拍照
+                    openCamara(this.openCameraTaskId);
                     // Bitmap bm = (Bitmap) data.getExtras().get("data");
                     // jsCallBackPhotoBase64String(bm);
                 }

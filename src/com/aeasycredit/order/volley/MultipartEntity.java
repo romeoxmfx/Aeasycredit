@@ -1,3 +1,4 @@
+
 package com.aeasycredit.order.volley;
 
 import java.io.ByteArrayInputStream;
@@ -16,9 +17,8 @@ import org.apache.http.message.BasicHeader;
 
 import android.text.TextUtils;
 
-
 public class MultipartEntity implements HttpEntity {
-    
+
     private final static char[] MULTIPART_CHARS = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             .toCharArray();
     /**
@@ -31,11 +31,19 @@ public class MultipartEntity implements HttpEntity {
      * 文本参数和字符集
      */
     private final String TYPE_TEXT_CHARSET = "text/plain; charset=UTF-8";
- 
+
     /**
      * 字节流参数
      */
     private final String TYPE_OCTET_STREAM = "application/octet-stream";
+    
+    /**
+     * 图片文件
+     */
+    private final String TYPE_JPGE_STREAM = "image/jpeg";
+    
+    private final String TYPE_PNG_STREAM = "image/png";
+    
     /**
      * 二进制参数
      */
@@ -44,7 +52,7 @@ public class MultipartEntity implements HttpEntity {
      * 文本参数
      */
     private final byte[] BIT_ENCODING = "Content-Transfer-Encoding: 8bit\r\n\r\n".getBytes();
- 
+
     /**
      * 分隔符
      */
@@ -53,11 +61,11 @@ public class MultipartEntity implements HttpEntity {
      * 输出流
      */
     ByteArrayOutputStream mOutputStream = new ByteArrayOutputStream();
- 
+
     public MultipartEntity() {
         this.mBoundary = generateBoundary();
     }
- 
+
     /**
      * 生成分隔符
      * 
@@ -71,7 +79,7 @@ public class MultipartEntity implements HttpEntity {
         }
         return buf.toString();
     }
- 
+
     /**
      * 参数开头的分隔符
      * 
@@ -80,7 +88,7 @@ public class MultipartEntity implements HttpEntity {
     private void writeFirstBoundary() throws IOException {
         mOutputStream.write(("--" + mBoundary + "\r\n").getBytes());
     }
- 
+
     /**
      * 添加文本参数
      * 
@@ -90,7 +98,7 @@ public class MultipartEntity implements HttpEntity {
     public void addStringPart(final String paramName, final String value) {
         writeToOutputStream(paramName, value.getBytes(), TYPE_TEXT_CHARSET, BIT_ENCODING, "");
     }
- 
+
     /**
      * 将数据写入到输出流中
      * 
@@ -108,14 +116,15 @@ public class MultipartEntity implements HttpEntity {
             mOutputStream.write((CONTENT_TYPE + type + NEW_LINE_STR).getBytes());
             mOutputStream
                     .write(getContentDispositionBytes(paramName, fileName));
-            mOutputStream.write(encodingBytes);
+            // mOutputStream.write(encodingBytes);
+            mOutputStream.write("\r\n\r\n".getBytes());
             mOutputStream.write(rawData);
             mOutputStream.write(NEW_LINE_STR.getBytes());
         } catch (final IOException e) {
             e.printStackTrace();
         }
     }
- 
+
     /**
      * 添加二进制参数, 例如Bitmap的字节流参数
      * 
@@ -125,7 +134,85 @@ public class MultipartEntity implements HttpEntity {
     public void addBinaryPart(String paramName, final byte[] rawData) {
         writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM, BINARY_ENCODING, "no-file");
     }
- 
+
+    /**
+     * 添加二进制参数, 例如Bitmap的字节流参数
+     * 
+     * @param key
+     * @param rawData
+     */
+    public void addBinaryPart(String paramName, final byte[] rawData, String fileName) {
+        writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM, BINARY_ENCODING, fileName);
+    }
+    
+    /**
+     * 添加二进制参数, 例如Bitmap的字节流参数
+     * 
+     * @param key
+     * @param rawData
+     */
+    public void addImageBinaryPart(String paramName, final byte[] rawData, String fileName) {
+        // writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM,
+        // BINARY_ENCODING, file.getName());
+        // InputStream fin = null;
+        try {
+            // fin = new FileInputStream(file);
+            writeFirstBoundary();
+//            final String type = CONTENT_TYPE + TYPE_OCTET_STREAM + NEW_LINE_STR;
+            final String type = CONTENT_TYPE + TYPE_PNG_STREAM + NEW_LINE_STR;
+            mOutputStream.write(getContentDispositionBytes(paramName, fileName));
+            mOutputStream.write(type.getBytes());
+            // mOutputStream.write(BINARY_ENCODING);
+            mOutputStream.write("\r\n\r\n".getBytes());
+
+            // final byte[] tmp = new byte[4096];
+            // int len = 0;
+            // while ((len = fin.read(tmp)) != -1) {
+            mOutputStream.write(rawData);
+            // }
+            mOutputStream.write(NEW_LINE_STR.getBytes());
+            mOutputStream.flush();
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } finally {
+            // closeSilently(fin);
+        }
+    }
+
+    /**
+     * 添加二进制参数, 例如Bitmap的字节流参数
+     * 
+     * @param key
+     * @param rawData
+     */
+    public void addImageBinaryPart(String paramName, final byte[] rawData, File file) {
+        // writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM,
+        // BINARY_ENCODING, file.getName());
+        // InputStream fin = null;
+        try {
+            // fin = new FileInputStream(file);
+            writeFirstBoundary();
+//            final String type = CONTENT_TYPE + TYPE_OCTET_STREAM + NEW_LINE_STR;
+            final String type = CONTENT_TYPE + TYPE_JPGE_STREAM + NEW_LINE_STR;
+            mOutputStream.write(getContentDispositionBytes(paramName, file.getName()));
+            mOutputStream.write(type.getBytes());
+            // mOutputStream.write(BINARY_ENCODING);
+            mOutputStream.write("\r\n\r\n".getBytes());
+
+            // final byte[] tmp = new byte[4096];
+            // int len = 0;
+            // while ((len = fin.read(tmp)) != -1) {
+            mOutputStream.write(rawData);
+            // }
+            mOutputStream.write(NEW_LINE_STR.getBytes());
+            mOutputStream.flush();
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } finally {
+            // closeSilently(fin);
+        }
+    }
+
     /**
      * 添加文件参数,可以实现文件上传功能
      * 
@@ -141,12 +228,13 @@ public class MultipartEntity implements HttpEntity {
             mOutputStream.write(getContentDispositionBytes(key, file.getName()));
             mOutputStream.write(type.getBytes());
             mOutputStream.write(BINARY_ENCODING);
- 
+
             final byte[] tmp = new byte[4096];
             int len = 0;
             while ((len = fin.read(tmp)) != -1) {
                 mOutputStream.write(tmp, 0, len);
             }
+            mOutputStream.write(NEW_LINE_STR.getBytes());
             mOutputStream.flush();
         } catch (final IOException e) {
             e.printStackTrace();
@@ -154,7 +242,7 @@ public class MultipartEntity implements HttpEntity {
             closeSilently(fin);
         }
     }
- 
+
     private void closeSilently(Closeable closeable) {
         try {
             if (closeable != null) {
@@ -164,7 +252,7 @@ public class MultipartEntity implements HttpEntity {
             e.printStackTrace();
         }
     }
- 
+
     private byte[] getContentDispositionBytes(String paramName, String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(CONTENT_DISPOSITION + "form-data; name=\"" + paramName + "\"");
@@ -173,35 +261,35 @@ public class MultipartEntity implements HttpEntity {
             stringBuilder.append("; filename=\""
                     + fileName + "\"");
         }
- 
+
         return stringBuilder.append(NEW_LINE_STR).toString().getBytes();
     }
- 
+
     @Override
     public long getContentLength() {
         return mOutputStream.toByteArray().length;
     }
- 
+
     @Override
     public Header getContentType() {
         return new BasicHeader("Content-Type", "multipart/form-data; boundary=" + mBoundary);
     }
- 
+
     @Override
     public boolean isChunked() {
         return false;
     }
- 
+
     @Override
     public boolean isRepeatable() {
         return false;
     }
- 
+
     @Override
     public boolean isStreaming() {
         return false;
     }
- 
+
     @Override
     public void writeTo(final OutputStream outstream) throws IOException {
         // 参数最末尾的结束符
@@ -211,12 +299,12 @@ public class MultipartEntity implements HttpEntity {
         //
         outstream.write(mOutputStream.toByteArray());
     }
- 
+
     @Override
     public Header getContentEncoding() {
         return null;
     }
- 
+
     @Override
     public void consumeContent() throws IOException,
             UnsupportedOperationException {
@@ -225,7 +313,7 @@ public class MultipartEntity implements HttpEntity {
                     "Streaming entity does not implement #consumeContent()");
         }
     }
- 
+
     @Override
     public InputStream getContent() {
         return new ByteArrayInputStream(mOutputStream.toByteArray());

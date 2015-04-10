@@ -1,5 +1,6 @@
 package com.aeasycredit.order.application;
 
+import com.aeasycredit.order.volley.MultiPartHttpStack;
 import com.aeasycredit.order.volley.RequestQueue;
 import com.aeasycredit.order.volley.toolbox.Volley;
 
@@ -12,6 +13,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        mRequestQueue = Volley.newRequestQueue(getApplicationContext(),new MultiPartHttpStack());
     }
 }

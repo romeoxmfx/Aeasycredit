@@ -7,11 +7,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import com.aeasycredit.order.models.RequestWrapper;
+import com.aeasycredit.order.volley.DefaultRetryPolicy;
 import com.aeasycredit.order.volley.MultipartEntity;
 import com.aeasycredit.order.volley.NetworkResponse;
 import com.aeasycredit.order.volley.ParseError;
 import com.aeasycredit.order.volley.Request;
 import com.aeasycredit.order.volley.Response;
+import com.aeasycredit.order.volley.RetryPolicy;
 import com.aeasycredit.order.volley.Response.ErrorListener;
 import com.aeasycredit.order.volley.Response.Listener;
 import com.google.gson.Gson;
@@ -20,30 +22,29 @@ import android.util.Log;
 
 /**
  * MultipartRequest，返回的结果是String格式的
- * 
  */
 public class MultipartRequest extends Request<RequestWrapper> {
-    
+
     protected static final String PROTOCOL_CHARSET = "utf-8";
 
     private MultipartEntity mMultiPartEntity;
     private Listener<RequestWrapper> mListener;
-//    private String requestBody;
+
+    // private String requestBody;
 
     public MultipartRequest(int method, String url,
             Listener<RequestWrapper> listener,
             ErrorListener errorListener) {
-//        super(method, url, params, errorListener);
+        // super(method, url, params, errorListener);
         super(method, url, errorListener);
-//        this.requestBody = requestBody;
+        // this.requestBody = requestBody;
         mListener = listener;
     }
 
-    
-    public void setMultipartEntity(MultipartEntity entity){
+    public void setMultipartEntity(MultipartEntity entity) {
         this.mMultiPartEntity = entity;
     }
-    
+
     /**
      * @return
      */
@@ -73,6 +74,13 @@ public class MultipartRequest extends Request<RequestWrapper> {
     @Override
     protected void deliverResponse(RequestWrapper response) {
         mListener.onResponse(response);
+    }
+
+    @Override
+    public RetryPolicy getRetryPolicy() {
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(1000 * 10,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        return retryPolicy;
     }
 
     @Override

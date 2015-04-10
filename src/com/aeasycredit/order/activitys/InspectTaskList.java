@@ -221,6 +221,6 @@ public class InspectTaskList extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
+        AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 }
