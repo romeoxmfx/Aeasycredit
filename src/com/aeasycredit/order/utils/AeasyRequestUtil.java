@@ -193,7 +193,7 @@ public class AeasyRequestUtil {
         } else if (AeaConstants.RESPONSE_CODE_700.equals(responseCode)) {
             return AeaConstants.RESPONSE_CODE_700;
         } else {
-            return AeaConstants.RESPONSE_CODE_200;
+            return AeaConstants.RESPONSE_CODE_NULL;
         }
     }
 }

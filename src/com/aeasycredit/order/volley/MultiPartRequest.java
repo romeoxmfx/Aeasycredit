@@ -23,6 +23,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
 import com.aeasycredit.order.models.RequestWrapper;
 import com.aeasycredit.order.volley.Response.ErrorListener;
 import com.aeasycredit.order.volley.Response.Listener;
@@ -111,10 +113,20 @@ public class MultiPartRequest extends Request<RequestWrapper> {
         try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+            JSONObject jo = new JSONObject(jsonString);
+            JSONObject joAea = jo.optJSONObject("aeasyapp");
+            String resbody = joAea.optString("responseBody");
+            if(TextUtils.isEmpty(resbody)){
+                joAea.remove("responseBody");
+                jo.put("aeasyapp", joAea);
+                jsonString = jo.toString();
+            }
+//            jsonString = "{\"aeasyapp\":{\"serialNumber\":\"CwpQal0cIC\",\"version\":\"v1.0\",\"method\":\"investigate.subimttask\",\"usercode\":\"0271\",\"uuid\":\"0271\",\"responseCode\":200,\"responseBody\":{\"uuid\":\"0271\"}}";
             RequestWrapper app = new Gson().fromJson(jsonString, RequestWrapper.class);
             return Response.success(app,
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.error(new ParseError(e));
         }
     }

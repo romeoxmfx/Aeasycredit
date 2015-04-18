@@ -1,6 +1,8 @@
 package com.aeasycredit.order.utils;
 
 public class AeaConstants {
+    public static final String TAG = "aeasy";
+    
     public static final String REQUEST_URL = "http://14.118.132.74:9527/router/mobileapp/test/request";
     public static final String REQUEST_URL_TEST = "http://192.168.1.104:8080/virgo/upload.do";
     public static final String VERSION = "v1.0";
@@ -30,4 +32,6 @@ public class AeaConstants {
     public static final String REPORT_TASK_ID = "report_task_id";
     public static final int REPORT_SECRET = 1;
     public static final int REPORT_PERCEIVE = 0;
+    
+    public static final int DATA_VERSION  = 1;
 }

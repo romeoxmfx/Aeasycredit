@@ -55,9 +55,9 @@
     <string name="inspect_report_contact_company_scale">公司规模</string>
     <string name="inspect_report_contact_product_tool">生产器具</string>
     <string name="inspect_report_contact_stock">存货(成品,含半成品)</string>
-    <string name="inspect_report_contact_interview_content">访谈内容</string>
+    <string name="inspect_report_contact_interview_content">访谈内容(*)</string>
     <string name="inspect_report_contact_inspect_content">考察内容</string>
-    <string name="inspect_report_contact_inspect_summary">考察总结</string>
+    <string name="inspect_report_contact_inspect_summary">考察总结(*)</string>
     <string name="inspect_report_contact_supplement">其他补充事项</string>
     <string name="inspect_report_contact_upload_photo">上传照片：</string>
     <string name="inspect_report_browse">浏览</string>
@@ -68,6 +68,8 @@
     <string name="inspect_report_yes">是</string>
     <string name="inspect_report_no">否</string>
     <string name="inspect_report_photo_selected">已选择%d张图片</string>
+    <string name="inspect_report_submit_fail">提交失败，请重试</string>
+    <string name="inspect_report_submit_succ">提交成功</string>
     
     <string name="more_than_max">超过了上限</string>
     <string name="preview">预览</string>

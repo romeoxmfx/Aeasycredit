@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -72,6 +73,7 @@ public class PhotoSelectorActivity extends Activity implements
 	private RelativeLayout layoutAlbum;
 	private ArrayList<PhotoModel> selected;
 	private TextView tvNumber;
+	private ArrayList<PhotoModel> photos;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +118,7 @@ public class PhotoSelectorActivity extends Activity implements
 		findViewById(R.id.bv_back_lh).setOnClickListener(this); // 返回
 
 		if(getIntent().hasExtra(KEY_DIR)){
-		    String dir = getIntent().getStringExtra(KEY_DIR);
+		    dir = getIntent().getStringExtra(KEY_DIR);
 		    photoSelectorDomain.getSpecifyFile(reccentListener, dir);//获取指定文件夹
 		}else{
 		    photoSelectorDomain.getReccent(reccentListener); // 更新最近照片
@@ -273,7 +275,12 @@ public class PhotoSelectorActivity extends Activity implements
 			bundle.putInt("position", position - 1);
 		else
 			bundle.putInt("position", position);
-		bundle.putString("album", tvAlbum.getText().toString());
+		
+		if(!TextUtils.isEmpty(dir)){
+		    bundle.putString(KEY_DIR, dir);
+		}
+//		bundle.putString("album", tvAlbum.getText().toString());
+//		bundle.put("photos", photos);
 		CommonUtils.launchActivity(this, PhotoPreviewActivity.class, bundle);
 	}
 
@@ -349,6 +356,7 @@ public class PhotoSelectorActivity extends Activity implements
 		@Override
 		public void onPhotoLoaded(List<PhotoModel> photos) {
 		    if(photos != null && photos.size() > 0){
+//		        PhotoSelectorActivity.this.photos = photos;
 		        for (PhotoModel model : photos) {
 		            if (selected.contains(model)) {
 		                model.setChecked(true);
@@ -360,4 +368,5 @@ public class PhotoSelectorActivity extends Activity implements
 		    }
 		}
 	};
+    private String dir;
 }

@@ -1,15 +1,18 @@
 
 package com.aeasycredit.order.activitys;
 
+import java.io.File;
 import java.util.List;
 
 import com.aeasycredit.order.R;
 import com.aeasycredit.order.application.MyApplication;
+import com.aeasycredit.order.database.DataBaseHelper;
 import com.aeasycredit.order.models.Aeasyapp;
 import com.aeasycredit.order.models.RequestWrapper;
 import com.aeasycredit.order.models.Task;
 import com.aeasycredit.order.tool.AeaCamera;
 import com.aeasycredit.order.utils.AeaConstants;
+import com.aeasycredit.order.utils.AeaFileUtil;
 import com.aeasycredit.order.utils.AeasyRequestUtil;
 import com.aeasycredit.order.utils.AeasySharedPreferencesUtil;
 import com.aeasycredit.order.volley.Request;
@@ -20,6 +23,7 @@ import com.google.gson.Gson;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +39,8 @@ public class InspectTaskList extends BaseActivity {
     ListView listview;
     List<Task> list;
     InspectTaskAdapter mAdapter;
+    public static final int REQUEST_CODE_TASK_REPORT = 1002;
+    public boolean requestCodeNoRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +66,26 @@ public class InspectTaskList extends BaseActivity {
                     String json = new Gson().toJson(task);
                     intent.putExtra(AeaConstants.EXTRA_TASK, json);
                 }
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE_TASK_REPORT);
             }
         });
-        requestList();
+//        requestList();
     }
 
+    @Override
+    protected void onResume() {
+        if(!requestCodeNoRefresh){
+            requestList();
+        }
+        super.onResume();
+    }
+    
+    @Override
+    protected void onStop() {
+        super.onStop();
+        requestCodeNoRefresh = false;
+    }
+    
     private void requestList() {
         // list = new ArrayList<Task>();
         // Task task = null;
@@ -221,6 +241,24 @@ public class InspectTaskList extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(AeaCamera.REQUEST_TAKE_PHOTO == requestCode){
+            requestCodeNoRefresh = true;
+        }else{
+            requestCodeNoRefresh = false;
+        }
         AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
+        if(RESULT_OK ==  resultCode && REQUEST_CODE_TASK_REPORT == requestCode){
+            //删除数据库和本地图片
+            if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID) && data.hasExtra(AeaConstants.REPORT_TYPE)){
+                String taskId = data.getExtras().getString(AeaConstants.REPORT_TASK_ID);
+                int type = data.getExtras().getInt(AeaConstants.REPORT_TYPE);
+                File dir = new File(Environment.getExternalStorageDirectory()
+                        + "/" + AeaCamera.baselocalTempImgDir + "/" + taskId);
+                if(dir.exists()){
+                    AeaFileUtil.delFolder(dir.getAbsolutePath());
+                }
+                new DataBaseHelper(this).delRequestBodyByIdAndType(taskId, type);
+            }
+        }
     }
 }

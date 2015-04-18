@@ -25,6 +25,18 @@
                 android:text="@string/inspect_report_finishtime"
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
+            
+            <TextView
+                android:clickable="true"
+                android:id="@+id/inspect_report_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,6 +68,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/inspect_report_contact_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -71,18 +84,19 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/inspect_report_contact_phone_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -98,7 +112,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +123,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/inspect_report_contact_position_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -124,7 +139,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,6 +156,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -150,8 +166,8 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/inspect_report_contact_company_position"
+            <com.aeasycredit.order.view.AeaEditText
+                android:id="@+id/inspect_report_contact_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -167,6 +183,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_nature_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -176,7 +193,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_company_nature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,6 +210,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_employee_count_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -202,7 +220,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_company_employee_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,6 +239,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_ground_area_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -230,7 +249,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_ground_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,6 +269,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_has_logo_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -298,6 +318,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_has_name_title"
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -344,6 +365,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_business_content_title"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -353,7 +375,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_company_business_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -372,6 +394,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_company_scale_title"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -381,7 +404,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_company_scale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -400,6 +423,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_product_tool_title"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -409,7 +433,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_product_tool"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -428,6 +452,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_stock_title"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -437,7 +462,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_stock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -450,6 +475,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/inspect_report_contact_interview_content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -465,7 +491,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_interview_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -481,7 +507,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:id="@+id/inspect_report_contact_inspect_summary_layout">
 
             <TextView
                 android:layout_width="70dp"
@@ -493,7 +520,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_inspect_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -512,6 +539,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/inspect_report_contact_supplement_title"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -521,7 +549,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_supplement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -549,13 +577,13 @@
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
 
-            <EditText
+            <com.aeasycredit.order.view.AeaEditText
                 android:id="@+id/inspect_report_contact_upload_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:maxLines="1"
                 android:enabled="true"
+                android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />

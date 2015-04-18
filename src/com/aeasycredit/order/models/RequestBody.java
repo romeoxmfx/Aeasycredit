@@ -1,7 +1,32 @@
 package com.aeasycredit.order.models;
 
 public class RequestBody {
+    public static final int INVESTIGATE_TYPE_SECERT = 1;
+    public static final int INVESTIGATE_TYPE_PERCEIVE = 0;
+    
+    public static final String ID = "id";
+    public static final String TASKID = "taskid";
+    public static final String INVESTIGATETYPE = "investigateType";
+    public static final String INVESTIGATEENDTIME = "investigateEndTime";
+    public static final String INVESTIGATEADDR = "investigateAddr"; 
+    public static final String CONTACTNAME = "contactName"; 
+    public static final String CONTACTPHONE = "contactPhone"; 
+    public static final String CONTACTPOST = "contactPost"; 
+    public static final String COMPANYNAME = "companyName"; 
+    public static final String COMPANYNATURE = "companyNature"; 
+    public static final String STAFFNUMBER = "staffNumber"; 
+    public static final String BUSINESSAREA = "businessArea"; 
+    public static final String ISHAVECOMPANYBOARD = "isHaveCompanyBoard"; 
+    public static final String ISHAVECOMPANYNAMEATOFFICEAREA = "isHaveCompanyNameAtOfficeArea"; 
+    public static final String SERVICECONTENT = "serviceContent"; 
+    public static final String COMPANYSCALE = "companyScale"; 
+    public static final String PRODUCTIONAPPARATUS = "productionApparatus"; 
+    public static final String INVENTORY = "inventory"; 
+    public static final String INTERVIEWCONTENT = "interviewContent"; 
+    public static final String SUMMARY = "summary"; 
+    public static final String OTHER = "other"; 
 
+    private int id;
     private String usercode;
     private String uuid;
     private String password;
@@ -170,6 +195,12 @@ public class RequestBody {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

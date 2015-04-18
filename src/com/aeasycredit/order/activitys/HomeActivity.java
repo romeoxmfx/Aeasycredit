@@ -79,27 +79,27 @@ public class HomeActivity extends BaseActivity {
                 break;
             case 1:
                 // test
-                byte[] igbyte = AeasyRequestUtil.compressImage(BitmapFactory.decodeFile(Environment
-                        .getExternalStorageDirectory()
-                        + "/"
-                        + "aeasy"
-                        + "/"
-                        + "taskid142855997461266371000"
-                        + "/"
-                        + "20150409021431.jpg"));
-
-                File file = new File(Environment.getExternalStorageDirectory()
-                        + "/" + "aeasy" + "/" + "taskid142855997461266371000" + "/"
-                        + "20150409021431_compress.jpg");
-                if (file.exists()) {
-                    file.delete();
-                }
-                try {
-                    FileOutputStream out = new FileOutputStream(file);
-                    out.write(igbyte);
-                    out.close();
-                } catch (Exception e) {
-                }
+//                byte[] igbyte = AeasyRequestUtil.compressImage(BitmapFactory.decodeFile(Environment
+//                        .getExternalStorageDirectory()
+//                        + "/"
+//                        + "aeasy"
+//                        + "/"
+//                        + "taskid142855997461266371000"
+//                        + "/"
+//                        + "20150409021431.jpg"));
+//
+//                File file = new File(Environment.getExternalStorageDirectory()
+//                        + "/" + "aeasy" + "/" + "taskid142855997461266371000" + "/"
+//                        + "20150409021431_compress.jpg");
+//                if (file.exists()) {
+//                    file.delete();
+//                }
+//                try {
+//                    FileOutputStream out = new FileOutputStream(file);
+//                    out.write(igbyte);
+//                    out.close();
+//                } catch (Exception e) {
+//                }
                 break;
             default:
                 break;

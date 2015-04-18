@@ -29,7 +29,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
     public static final int REQUEST_TAKE_PHOTO = 4001;
     public static final int REQUEST_PICK_PHOTO = REQUEST_TAKE_PHOTO + 1;
 
-    private String baselocalTempImgDir = "aeasy";
+    public static final String baselocalTempImgDir = "aeasy";
     private String localTempImgFileName = ".jpg";
 
     private Context mContext;
