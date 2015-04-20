@@ -17,6 +17,7 @@ import com.aeasycredit.order.models.RequestBody;
 import com.aeasycredit.order.volley.MultipartEntity;
 import com.aeasycredit.order.volley.toolbox.MultipartRequest;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.photoselector.model.PhotoModel;
 
 public class AeasyRequestUtil {
@@ -50,6 +51,7 @@ public class AeasyRequestUtil {
         String userCode = AeasySharedPreferencesUtil.getUserCode(context);
         String uuid = AeasySharedPreferencesUtil.getUuid(context);
         requestJson += new Gson().toJson(AeasyRequestBuilder
+//        requestJson += new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(AeasyRequestBuilder
                 .getSubmitAeasyapp(body, userCode, uuid));
         // requestJson += "\"";
         return requestJson;
@@ -120,22 +122,22 @@ public class AeasyRequestUtil {
                 + baos.toByteArray().length);
         if (baos.toByteArray().length / 1024 >= 300) {// 判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
             baos.reset();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);// 压缩50%
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);// 压缩50%
         }
         ByteArrayInputStream isBm = new
                 ByteArrayInputStream(baos.toByteArray());
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        // 开始读入图片
-        newOpts.inJustDecodeBounds = true;
-        Bitmap bm = BitmapFactory.decodeStream(isBm, null, newOpts);
-        newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-        Log.i("munion", "Pictures of old size ：" + newOpts.outWidth + "x"
-                + newOpts.outHeight);
+//        BitmapFactory.Options newOpts = new BitmapFactory.Options();
+//        // 开始读入图片
+//        newOpts.inJustDecodeBounds = true;
+//        Bitmap bm = BitmapFactory.decodeStream(isBm, null, newOpts);
+//        newOpts.inJustDecodeBounds = false;
+//        int w = newOpts.outWidth;
+//        int h = newOpts.outHeight;
+//        Log.i("munion", "Pictures of old size ：" + newOpts.outWidth + "x"
+//                + newOpts.outHeight);
         // AppUtils appUtils = AlimmContext.getAliContext().getAppUtils();
-        int ww = 320;
-        int hh = 640;
+//        int ww = 320;
+//        int hh = 640;
         // int aw = appUtils.getAppWidth();
         // int ah = appUtils.getAppHeight();
         // Log.i("munion", "Screen size : " + aw + "x" + ah);
@@ -143,33 +145,46 @@ public class AeasyRequestUtil {
         // ww = aw;
         // hh = ah;
         // }
-        Log.i("munion", "Pictures compression size : " + ww + "x" + hh);
+//        Log.i("munion", "Pictures compression size : " + ww + "x" + hh);
         // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;
-        if (w > h && w > ww) {
-            be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) {
-            be = (int) (newOpts.outHeight / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        Log.i("munion", "Pictures Compression ratio ：" + be);
-        newOpts.inSampleSize = be;// 设置缩放比例
-        isBm = new ByteArrayInputStream(baos.toByteArray());
-        bm = BitmapFactory.decodeStream(isBm, null, newOpts);
+//        int be = 1;
+//        if (w > h && w > ww) {
+//            be = (int) (newOpts.outWidth / ww);
+//        } else if (w < h && h > hh) {
+//            be = (int) (newOpts.outHeight / hh);
+//        }
+//        if (be <= 0)
+//            be = 1;
+//        Log.i("munion", "Pictures Compression ratio ：" + be);
+//        newOpts.inSampleSize = be;// 设置缩放比例
+//        isBm = new ByteArrayInputStream(baos.toByteArray());
+//        bm = BitmapFactory.decodeStream(isBm, null, newOpts);
+//        bitmap.recycle();
+//        bitmap = BitmapFactory.decodeStream(isBm);
         // 图片按质量压缩
-        ByteArrayOutputStream baost = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baost);
-        int options = 100;
-        while (baost.toByteArray().length / 1024 >= 300) { //
+//        ByteArrayOutputStream baost = new ByteArrayOutputStream();
+//        bm.compress(Bitmap.CompressFormat.JPEG, 100, baost);
+        int options = 70;
+        while (baos.toByteArray().length / 1024 >= 300) { //
         // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
-            baost.reset();
-            options -= 10;
-            bm.compress(Bitmap.CompressFormat.JPEG, options, baost);
+            baos.reset();
+            options -= 5;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);
+//            if(isBm != null){
+//                try {
+//                    isBm.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            isBm = new ByteArrayInputStream(baos.toByteArray());
+//            bitmap.recycle();
+//            bitmap = BitmapFactory.decodeStream(isBm);
+            
         }
         Log.i("munion", "Picture size after compression："
-                + baost.toByteArray().length);
-        return baost.toByteArray();
+                + baos.toByteArray().length);
+        return baos.toByteArray();
     }
 
     public static String getTaskListRequest(String userCode, String uuid) {

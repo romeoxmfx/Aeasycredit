@@ -30,6 +30,7 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
     Button btPerceiveReport;
     Button btSecretReport;
     private Task task;
+    boolean result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,7 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
                         AeaConstants.REPORT_PERCEIVE);
                 intentPerceiveReport.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
                 intentPerceiveReport.putExtra(AeaConstants.REPORT_ADDRESS, task.getInvestigateAddr());
-                startActivity(intentPerceiveReport);
+                startActivityForResult(intentPerceiveReport,InspectTaskList.REQUEST_CODE_TASK_REPORT);
                 break;
             case R.id.inspect_detail_inspect_secret_report:
                 Intent intentSecretReport = new Intent(this, InspectReportActivity.class);
@@ -110,11 +111,33 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
                         AeaConstants.REPORT_SECRET);
                 intentSecretReport.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
                 intentSecretReport.putExtra(AeaConstants.REPORT_ADDRESS, task.getInvestigateAddr());
-                startActivity(intentSecretReport);
+                startActivityForResult(intentSecretReport,InspectTaskList.REQUEST_CODE_TASK_REPORT);
                 break;
             default:
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(RESULT_OK == resultCode){
+            if(InspectTaskList.REQUEST_CODE_TASK_REPORT == requestCode){
+//                result = true;
+                Intent intent = new Intent();
+                intent.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
+                setResult(RESULT_OK, intent);
+            }
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+//        if(result){
+//            Intent intent = new Intent();
+//            intent.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
+//            setResult(RESULT_OK, intent);
+//        }
+        super.onDestroy();
+    }
 }

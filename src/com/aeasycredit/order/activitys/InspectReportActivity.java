@@ -3,8 +3,10 @@ package com.aeasycredit.order.activitys;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
@@ -23,6 +25,7 @@ import com.aeasycredit.order.volley.Request;
 import com.aeasycredit.order.volley.VolleyError;
 import com.photoselector.model.PhotoModel;
 import com.photoselector.ui.PhotoSelectorActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -426,6 +429,14 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
         body.setOther(getEditTextString(etOther));
         if (photos != null && photos.size() > 0) {
             body.setImageSize(photos.size() + "");
+            StringBuffer sb = new StringBuffer();
+            for (PhotoModel photos : photos) {
+                sb.append(photos.getOriginalPath())
+                  .append(",");
+            }
+            String files = sb.toString();
+            files = files.substring(0,files.lastIndexOf(","));
+            body.setFiles(files);
         }
         return body;
     }
@@ -496,6 +507,24 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                     etInterviewContent.setText(body.getInterviewContent());
                     etSummary.setText(body.getSummary());
                     etOther.setText(body.getOther());
+                    try {
+                        if(!TextUtils.isEmpty(body.getFiles())){
+                            String[] files = body.getFiles().split(",");
+                            if(files != null && files.length > 0){
+                                photos = new ArrayList<PhotoModel>();
+                                PhotoModel model;
+                                for (String string : files) {
+                                    model = new PhotoModel();
+                                    model.setOriginalPath(string);
+                                    photos.add(model);
+                                }
+                                String str = getResources().getString(R.string.inspect_report_photo_selected);
+                                etPhotoUploder.setText(String.format(str, photos.size()));
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }else{
                 Calendar calendar = Calendar.getInstance();

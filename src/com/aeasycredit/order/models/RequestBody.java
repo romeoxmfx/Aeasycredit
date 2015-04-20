@@ -1,5 +1,7 @@
 package com.aeasycredit.order.models;
 
+import com.google.gson.annotations.Expose;
+
 public class RequestBody {
     public static final int INVESTIGATE_TYPE_SECERT = 1;
     public static final int INVESTIGATE_TYPE_PERCEIVE = 0;
@@ -25,6 +27,7 @@ public class RequestBody {
     public static final String INTERVIEWCONTENT = "interviewContent"; 
     public static final String SUMMARY = "summary"; 
     public static final String OTHER = "other"; 
+    public static final String FILES = "files"; 
 
     private int id;
     private String usercode;
@@ -51,6 +54,8 @@ public class RequestBody {
     private String summary;
     private String other;
     private String imageSize;
+//    @Expose(serialize=false)
+    private String files;
     
     public String getUsercode() {
         return usercode;
@@ -201,6 +206,12 @@ public class RequestBody {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public String getFiles() {
+        return files;
+    }
+    public void setFiles(String files) {
+        this.files = files;
     }
     
 }

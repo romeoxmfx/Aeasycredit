@@ -22,7 +22,7 @@ import com.photoselector.model.PhotoModel;
  */
 
 public class PhotoItem extends LinearLayout implements OnCheckedChangeListener,
-		OnLongClickListener {
+		OnLongClickListener,android.view.View.OnClickListener{
 
 	private ImageView ivPhoto;
 	private CheckBox cbPhoto;
@@ -42,12 +42,14 @@ public class PhotoItem extends LinearLayout implements OnCheckedChangeListener,
 				true);
 		this.listener = listener;
 
-		setOnLongClickListener(this);
+//		setOnLongClickListener(this);
 
 		ivPhoto = (ImageView) findViewById(R.id.iv_photo_lpsi);
 		cbPhoto = (CheckBox) findViewById(R.id.cb_photo_lpsi);
 
 		cbPhoto.setOnCheckedChangeListener(this); // CheckBoxѡ��״̬�ı������
+		ivPhoto.setOnClickListener(this);
+		ivPhoto.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -125,5 +127,28 @@ public class PhotoItem extends LinearLayout implements OnCheckedChangeListener,
 			l.onItemClick(position);
 		return true;
 	}
+
+    @Override
+    public void onClick(View v) {
+//        boolean isChecked = false;
+//        if(cbPhoto.isChecked()){
+//            isChecked = false;
+//        }else{
+//            isChecked = true;
+//        }
+//        
+//        if (!isCheckAll) {
+//            listener.onCheckedChanged(photo, cbPhoto, isChecked); // ����������ص�����
+//        }
+//        // ��ͼƬ�䰵���߱���
+//        if (isChecked) {
+//            setDrawingable();
+//            ivPhoto.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+//        } else {
+//            ivPhoto.clearColorFilter();
+//        }
+//        photo.setChecked(isChecked);
+        cbPhoto.setChecked(!cbPhoto.isChecked());
+    }
 
 }
