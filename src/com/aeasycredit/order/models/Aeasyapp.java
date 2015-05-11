@@ -6,7 +6,8 @@ public class Aeasyapp {
     private String serialNumber;
     private String version;
     private String method;
-    private String usercode;
+    private String appVersion;
+    private String loginname;
     @SerializedName("private")
     private String mprivate;
     private String uuid;
@@ -31,12 +32,6 @@ public class Aeasyapp {
     }
     public void setMethod(String method) {
         this.method = method;
-    }
-    public String getUsercode() {
-        return usercode;
-    }
-    public void setUsercode(String usercode) {
-        this.usercode = usercode;
     }
     public String getMprivate() {
         return mprivate;
@@ -67,6 +62,18 @@ public class Aeasyapp {
     }
     public void setResponseCode(String responseCode) {
         this.responseCode = responseCode;
+    }
+    public String getAppVersion() {
+        return appVersion;
+    }
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
+    public String getLoginname() {
+        return loginname;
+    }
+    public void setLoginname(String loginname) {
+        this.loginname = loginname;
     }
     
 }

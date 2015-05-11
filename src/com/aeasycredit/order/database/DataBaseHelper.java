@@ -17,7 +17,7 @@ public class DataBaseHelper {
     // 数据库名称
     private static String DB_NAME = "aeasycredit.db";
     // 数据库版本
-    private static int DB_VERSION = 3;
+    private static int DB_VERSION = 4;
     private SQLiteDatabase db;
     private SqliteHelper dbHelper;
 
@@ -47,25 +47,26 @@ public class DataBaseHelper {
                     user.setTaskid(cursor.getString(1));
                     user.setInvestigateType(cursor.getString(2));
                     user.setInvestigateEndTime(cursor.getString(3));
-                    user.setInvestigateAddr(cursor.getString(4));
-                    user.setContactName(cursor.getString(5));
-                    user.setContactPhone(cursor.getString(6));
-                    user.setContactPost(cursor.getString(7));
-                    user.setCompanyName(cursor.getString(8));
-                    user.setCompanyNature(cursor.getString(9));
-                    user.setStaffNumber(cursor.getString(10));
-                    user.setBusinessArea(cursor.getString(11));
-                    user.setIsHaveCompanyBoard(cursor.getInt(12) != 0);
-                    user.setIsHaveCompanyNameAtOfficeArea(cursor.getInt(13) != 0);
-                    user.setServiceContent(cursor.getString(14));
-                    user.setCompanyScale(cursor.getString(15));
-                    user.setProductionApparatus(cursor.getString(16));
-                    user.setInventory(cursor.getString(17));
-                    user.setInterviewContent(cursor.getString(18));
-                    user.setSummary(cursor.getString(19));
-                    user.setOther(cursor.getString(20));
+                    user.setInvestigateStartTime(cursor.getString(4));
+                    user.setInvestigateAddr(cursor.getString(5));
+                    user.setContactName(cursor.getString(6));
+                    user.setContactPhone(cursor.getString(7));
+                    user.setContactPost(cursor.getString(8));
+                    user.setCompanyName(cursor.getString(9));
+                    user.setCompanyNature(cursor.getString(10));
+                    user.setStaffNumber(cursor.getString(11));
+                    user.setBusinessArea(cursor.getString(12));
+                    user.setIsHaveCompanyBoard(cursor.getInt(13) != 0);
+                    user.setIsHaveCompanyNameAtOfficeArea(cursor.getInt(14) != 0);
+                    user.setServiceContent(cursor.getString(15));
+                    user.setCompanyScale(cursor.getString(16));
+                    user.setProductionApparatus(cursor.getString(17));
+                    user.setInventory(cursor.getString(18));
+                    user.setInterviewContent(cursor.getString(19));
+                    user.setSummary(cursor.getString(20));
+                    user.setOther(cursor.getString(21));
                     // user.setImageSize(cursor.getString(20));
-                    user.setFiles(cursor.getString(21));
+                    user.setFiles(cursor.getString(22));
                     userList.add(user);
                     cursor.moveToNext();
                 }
@@ -93,25 +94,26 @@ public class DataBaseHelper {
                 user.setTaskid(cursor.getString(1));
                 user.setInvestigateType(cursor.getString(2));
                 user.setInvestigateEndTime(cursor.getString(3));
-                user.setInvestigateAddr(cursor.getString(4));
-                user.setContactName(cursor.getString(5));
-                user.setContactPhone(cursor.getString(6));
-                user.setContactPost(cursor.getString(7));
-                user.setCompanyName(cursor.getString(8));
-                user.setCompanyNature(cursor.getString(9));
-                user.setStaffNumber(cursor.getString(10));
-                user.setBusinessArea(cursor.getString(11));
-                user.setIsHaveCompanyBoard(cursor.getInt(12) != 0);
-                user.setIsHaveCompanyNameAtOfficeArea(cursor.getInt(13) != 0);
-                user.setServiceContent(cursor.getString(14));
-                user.setCompanyScale(cursor.getString(15));
-                user.setProductionApparatus(cursor.getString(16));
-                user.setInventory(cursor.getString(17));
-                user.setInterviewContent(cursor.getString(18));
-                user.setSummary(cursor.getString(19));
-                user.setOther(cursor.getString(20));
+                user.setInvestigateStartTime(cursor.getString(4));
+                user.setInvestigateAddr(cursor.getString(5));
+                user.setContactName(cursor.getString(6));
+                user.setContactPhone(cursor.getString(7));
+                user.setContactPost(cursor.getString(8));
+                user.setCompanyName(cursor.getString(9));
+                user.setCompanyNature(cursor.getString(10));
+                user.setStaffNumber(cursor.getString(11));
+                user.setBusinessArea(cursor.getString(12));
+                user.setIsHaveCompanyBoard(cursor.getInt(13) != 0);
+                user.setIsHaveCompanyNameAtOfficeArea(cursor.getInt(14) != 0);
+                user.setServiceContent(cursor.getString(15));
+                user.setCompanyScale(cursor.getString(16));
+                user.setProductionApparatus(cursor.getString(17));
+                user.setInventory(cursor.getString(18));
+                user.setInterviewContent(cursor.getString(19));
+                user.setSummary(cursor.getString(20));
+                user.setOther(cursor.getString(21));
                 // user.setImageSize(cursor.getString(20));
-                user.setFiles(cursor.getString(21));
+                user.setFiles(cursor.getString(22));
             }
         } catch (Exception e) {
             if (cursor != null) {
@@ -140,6 +142,7 @@ public class DataBaseHelper {
         values.put(RequestBody.TASKID, body.getTaskid());
         values.put(RequestBody.INVESTIGATETYPE, body.getInvestigateType());
         values.put(RequestBody.INVESTIGATEENDTIME, body.getInvestigateEndTime());
+        values.put(RequestBody.INVESTIGATESTARTTIME, body.getInvestigateStartTime());
         values.put(RequestBody.INVESTIGATEADDR, body.getInvestigateAddr());
         values.put(RequestBody.CONTACTNAME, body.getContactName());
         values.put(RequestBody.CONTACTPHONE, body.getContactPhone());
@@ -187,6 +190,7 @@ public class DataBaseHelper {
         values.put(RequestBody.TASKID, body.getTaskid());
         values.put(RequestBody.INVESTIGATETYPE, body.getInvestigateType());
         values.put(RequestBody.INVESTIGATEENDTIME, body.getInvestigateEndTime());
+        values.put(RequestBody.INVESTIGATESTARTTIME, body.getInvestigateStartTime());
         values.put(RequestBody.INVESTIGATEADDR, body.getInvestigateAddr());
         values.put(RequestBody.CONTACTNAME, body.getContactName());
         values.put(RequestBody.CONTACTPHONE, body.getContactPhone());

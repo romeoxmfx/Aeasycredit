@@ -1,7 +1,5 @@
 package com.aeasycredit.order.models;
 
-import com.google.gson.annotations.Expose;
-
 public class RequestBody {
     public static final int INVESTIGATE_TYPE_SECERT = 1;
     public static final int INVESTIGATE_TYPE_PERCEIVE = 0;
@@ -10,6 +8,7 @@ public class RequestBody {
     public static final String TASKID = "taskid";
     public static final String INVESTIGATETYPE = "investigateType";
     public static final String INVESTIGATEENDTIME = "investigateEndTime";
+    public static final String INVESTIGATESTARTTIME = "investigateStartTime";
     public static final String INVESTIGATEADDR = "investigateAddr"; 
     public static final String CONTACTNAME = "contactName"; 
     public static final String CONTACTPHONE = "contactPhone"; 
@@ -30,12 +29,13 @@ public class RequestBody {
     public static final String FILES = "files"; 
 
     private int id;
-    private String usercode;
+    private String loginname;
     private String uuid;
     private String password;
     private String taskid;
     private String investigateType;
     private String investigateEndTime;
+    private String investigateStartTime;
     private String investigateAddr;
     private String contactName;
     private String contactPhone;
@@ -57,12 +57,6 @@ public class RequestBody {
 //    @Expose(serialize=false)
     private String files;
     
-    public String getUsercode() {
-        return usercode;
-    }
-    public void setUsercode(String usercode) {
-        this.usercode = usercode;
-    }
     public String getUuid() {
         return uuid;
     }
@@ -212,6 +206,18 @@ public class RequestBody {
     }
     public void setFiles(String files) {
         this.files = files;
+    }
+    public String getLoginname() {
+        return loginname;
+    }
+    public void setLoginname(String loginname) {
+        this.loginname = loginname;
+    }
+    public String getInvestigateStartTime() {
+        return investigateStartTime;
+    }
+    public void setInvestigateStartTime(String investigateStartTime) {
+        this.investigateStartTime = investigateStartTime;
     }
     
 }

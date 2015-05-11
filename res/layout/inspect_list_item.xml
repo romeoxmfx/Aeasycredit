@@ -2,100 +2,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aeasycredit.order.activitys.HomeActivity" 
-    android:descendantFocusability="blocksDescendants">
+    android:background="@color/login_bg"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity" >
 
     <LinearLayout
-        android:id="@+id/lltop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#DCDCDC"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp" >
+        android:padding="1dp" >
 
-        <TextView
-            android:id="@+id/inspect_list_item_id"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:textColor="#ff0000"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:focusableInTouchMode="true" 
-            android:focusable="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:text="1"
-            android:textSize="10sp" />
+        <RelativeLayout
+            android:layout_width="122dp"
+            android:layout_height="122dp"
+            android:padding="12dp"
+            android:background="@android:color/white" >
 
-        <TextView
-            android:id="@+id/inspect_list_customer_item_name"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/inspect_list_item_customer_name"
-            android:textColor="#ff0000"
-            android:layout_marginLeft="2dp"
-            android:textSize="10sp" />
+            <ImageView
+                android:id="@+id/inspect_list_item_image"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/photo" />
 
-        <TextView
-            android:id="@+id/inspect_list_item_customer_name_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_alignParentBottom="true">
 
-        <TextView
-            android:id="@+id/inspect_list_item_customer_inspect_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="@string/inspect_list_item_inspect_date"
-            android:textStyle="bold"
-            android:textSize="10sp" />
+                <Button
+                    android:id="@+id/inspect_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#99ef8122"
+                    android:text="@string/inspect_preview"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/inspect_list_item_customer_inspect_date_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:textSize="10sp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white" />
+
+                <Button
+                    android:id="@+id/inspect_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#99ef8122"
+                    android:text="@string/inspect_camera"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:paddingBottom="12dp"
+            android:paddingLeft="2dp" >
+
+            <LinearLayout
+                android:id="@+id/lltop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/inspect_list_item_id"
+                    android:layout_width="51dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="1"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" 
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/inspect_list_customer_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="@string/inspect_list_item_customer_name"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_list_item_customer_name_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="abc"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rladdress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lltop">
+
+                <TextView
+                    android:id="@+id/inspect_list_item_customer_address_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/inspect_list_item_address_title"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_list_item_customer_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/inspect_list_item_customer_address_title"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="啊；连锁店就发生了；附件是辣的房间里萨；的减肥了撒；点击发送；阿里的房间萨拉；打飞机啊代理商；附件萨拉；对方就撒旦了；解放路撒的减肥了撒的减肥了；撒的减肥了；撒旦福建省；拉大房间爱丽丝；的减肥了；撒旦就发代理商；就发了啥；的减肥拉动是"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rladdress"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/inspect_list_item_customer_inspect_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_list_item_inspect_date"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_list_item_customer_inspect_date_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="asdb"
+                    android:textColor="#8f8f8f"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/rladdress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lltop"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/inspect_list_item_customer_address_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/inspect_list_item_address_title"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/inspect_list_item_customer_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/inspect_list_item_customer_address_title"
-            android:gravity="center_vertical"
-            android:ellipsize="end"
-            android:lines="3"
-            android:maxLines="3"
-            android:text="啊；连锁店就发生了；附件是辣的房间里萨；的减肥了撒；点击发送；阿里的房间萨拉；打飞机啊代理商；附件萨拉；对方就撒旦了；解放路撒的减肥了撒的减肥了；撒的减肥了；撒旦福建省；拉大房间爱丽丝；的减肥了；撒旦就发代理商；就发了啥；的减肥拉动是"
-            android:textSize="10sp" />
-    </RelativeLayout>
-
-    <Button 
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:id="@+id/inspect_camera"
-        android:text="@string/inspect_camera"
-        android:textSize="10sp"
-        android:layout_below="@id/rladdress"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        />
 </RelativeLayout>

@@ -59,7 +59,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
         isInit = true;
     }
 
-    public void openCamara(String taskId) {
+    public void openCamara(Context mContext,String taskId) {
         // 先验证手机是否有sdcard
         this.openCameraTaskId = taskId;
         String status = Environment.getExternalStorageState();
@@ -154,7 +154,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
 //                        e.printStackTrace();
 //                    }
                     //继续拍照
-                    openCamara(this.openCameraTaskId);
+//                    openCamara(this.openCameraTaskId);
                     // Bitmap bm = (Bitmap) data.getExtras().get("data");
                     // jsCallBackPhotoBase64String(bm);
                 }

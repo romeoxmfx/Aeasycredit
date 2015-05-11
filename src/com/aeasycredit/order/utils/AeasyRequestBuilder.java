@@ -5,6 +5,7 @@ import java.util.Random;
 
 import android.content.Context;
 
+import com.aeasycredit.order.application.MyApplication;
 import com.aeasycredit.order.models.Aeasyapp;
 import com.aeasycredit.order.models.RequestBody;
 import com.aeasycredit.order.models.RequestWrapper;
@@ -56,6 +57,7 @@ public class AeasyRequestBuilder {
         aeasyapp = new Aeasyapp();
         aeasyapp.setSerialNumber(createRandomString(10));
         aeasyapp.setVersion(AeaConstants.VERSION);
+        aeasyapp.setAppVersion(MyApplication.appVersion);
     }
 
     public AeasyRequestBuilder setPrivate(String mprivate) {
@@ -74,7 +76,7 @@ public class AeasyRequestBuilder {
     }
 
     public AeasyRequestBuilder setUserCode(String userCode) {
-        aeasyapp.setUsercode(userCode);
+        aeasyapp.setLoginname(userCode);
         return this;
     }
 
@@ -121,7 +123,7 @@ public class AeasyRequestBuilder {
                 .setMethod(AeaConstants.METHOD_LOGIN)
                 // .setPrivate(AeaConstants.PRIVATE_LOGIN)
                 .setRequestBody(requestBody)
-                .setUserCode(requestBody.getUsercode())
+                .setUserCode(requestBody.getLoginname())
                 // .setUuid(requestBody.getUsercode())
                 // .setSerNum("8ed5a52093c7445c956da09dd3dc1cc4")
                 .getAeasyapp();
@@ -139,7 +141,7 @@ public class AeasyRequestBuilder {
                 .setMethod(AeaConstants.METHOD_CHECK_LOGIN)
                 // .setPrivate(AeaConstants.PRIVATE_CHECKOUK_LOGIN)
                 .setRequestBody(requestBody)
-                .setUserCode(requestBody.getUsercode())
+                .setUserCode(requestBody.getLoginname())
                 .setUuid(requestBody.getUuid())
                 // .setSerNum("8ed5a52093c7445c956da09dd3dc1cc4")
                 .getAeasyapp();

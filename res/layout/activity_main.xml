@@ -2,18 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_back"
-    tools:context="com.aeasycredit.order.activitys.HomeActivity" 
-    android:descendantFocusability="blocksDescendants">
+    android:background="@color/login_bg"
+    android:descendantFocusability="blocksDescendants"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity" >
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_logo" />
 
     <GridView
-       android:id="@+id/dashboard_grid"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:listSelector="@android:color/transparent"
-       android:stretchMode="columnWidth"
-       android:verticalSpacing="20.0dip"
-       android:layout_centerInParent="true"
-       style="@style/dashboard" />
+        android:id="@+id/dashboard_grid"
+        style="@style/dashboard"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/logo"
+        android:layout_centerInParent="true"
+        android:background="@color/login_bg"
+        android:listSelector="@android:color/transparent"
+        android:paddingTop="46dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20.0dip" />
 
 </RelativeLayout>

@@ -11,14 +11,17 @@
     <string name="login_ok">login</string>
     <string name="dashboard_example_home_btn_analytics">analytics</string>
     <string name="inspect_list_item_customer_name">、customer name:</string>
+    <string name="inspect_list_item_customer_info">customer info:</string>
     <string name="inspect_list_item_inspect_date">inspect date:</string>
     <string name="inspect_list_item_address_title">address:</string>
     <string name="inspect_camera">camera</string>
+    <string name="inspect_preview">预览</string>
     <string name="inspect_task">inspect task</string>
     
     <string name="inspect_task_detail">inspect detail</string>
     <string name="inspect_task_detail_num">num：</string>
     <string name="inspect_task_detail_customer_name">customer name:</string>
+    <string name="inspect_task_detail_customer_info">customer info:</string>
     <string name="inspect_task_detail_customer_phone">customer phone:</string>
     <string name="inspect_task_detail_customer_address">inspect address:</string>
     <string name="inspect_task_detail_customer_contacts">contacts:</string>
@@ -41,6 +44,7 @@
     <string name="inspect_report_secert">secert report</string>
     <string name="inspect_report_perceive">perceive report</string>
     <string name="inspect_report_finishtime">perceive finish time</string>
+    <string name="inspect_report_starttime">perceive start time</string>
     <string name="inspect_report_address">inspect address</string>
     <string name="inspect_report_contact">inspect contact</string>
     <string name="inspect_report_contact_phone">contact phone</string>
@@ -56,8 +60,10 @@
     <string name="inspect_report_contact_product_tool">product tool</string>
     <string name="inspect_report_contact_stock">stock finished or unfinished</string>
     <string name="inspect_report_contact_interview_content">interview content</string>
+    <string name="inspect_report_contact_interview_content_hint">interview content</string>
     <string name="inspect_report_contact_inspect_content">inspect content</string>
     <string name="inspect_report_contact_inspect_summary">inspect summary</string>
+    <string name="inspect_report_contact_inspect_summary_hint">inspect summary</string>
     <string name="inspect_report_contact_supplement">inspect supplement things</string>
     <string name="inspect_report_contact_upload_photo">inspect upload photo</string>
     <string name="inspect_report_browse">browse</string>
@@ -80,9 +86,10 @@
 
     <color name="main_back">#ef8122</color>
     <color name="main_back_mask">#7fef8122</color>
-    <color name="main_title_background">#d06f00</color>
+    <color name="main_title_background">#ed8231</color>
     <color name="main_dashboard_color">#7d3c24</color>
     <color name="bg">#65BBF6</color>
+    <color name="login_bg">#eaeaea</color>
     
     
 </resources>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_title_heigh"
         android:layout_alignParentTop="true"
-        android:background="@color/bg" >
+        android:background="@drawable/actionbar_background" >
 
         <LinearLayout
             android:id="@+id/bv_back_lh"
@@ -57,7 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/tv_number"
-            android:background="@color/bg"
+            android:background="@drawable/actionbar_background"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="0dp"
@@ -121,7 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/collection_photo_toolbar_height"
         android:layout_alignParentBottom="true"
-        android:background="@color/bg" >
+        android:background="@drawable/actionbar_background" >
 
         <RelativeLayout
             android:layout_width="wrap_content"

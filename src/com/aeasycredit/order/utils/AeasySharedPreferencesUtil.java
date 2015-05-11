@@ -1,11 +1,9 @@
 package com.aeasycredit.order.utils;
 
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.text.TextUtils;
 
 public class AeasySharedPreferencesUtil {
     public static final String SHARED_FILE_NAME = "aeasy";
@@ -17,6 +15,17 @@ public class AeasySharedPreferencesUtil {
             SharedPreferences sp = context.getSharedPreferences(SHARED_FILE_NAME, 0);
             Editor editor = sp.edit();
             editor.putString(UUID, uuid);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void clearUUid(Context context) {
+        try {
+            SharedPreferences sp = context.getSharedPreferences(SHARED_FILE_NAME, 0);
+            Editor editor = sp.edit();
+            editor.remove(UUID);
             editor.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,5 +63,16 @@ public class AeasySharedPreferencesUtil {
             e.printStackTrace();
         }
         return uuid;
+    }
+    
+    public static void clearUserCode(Context context) {
+        try {
+            SharedPreferences sp = context.getSharedPreferences(SHARED_FILE_NAME, 0);
+            Editor editor = sp.edit();
+            editor.remove(USER_CODE);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

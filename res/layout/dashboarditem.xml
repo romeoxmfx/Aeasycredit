@@ -9,6 +9,18 @@
         android:id="@+id/dashboard_home_btn_analytics"
         style="@style/DashboardButton"
         android:layout_centerHorizontal="true"
-        android:text="@string/dashboard_example_home_btn_analytics" />
+        />
 
+    <TextView 
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dashboard_home_btn_analytics"
+        android:id="@+id/dashboard_home_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#7d3c25"
+        android:text="尚未开发"
+        />
+    
 </RelativeLayout>

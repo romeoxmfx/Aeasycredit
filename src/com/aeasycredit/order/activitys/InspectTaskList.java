@@ -4,6 +4,9 @@ package com.aeasycredit.order.activitys;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +16,7 @@ import com.aeasycredit.order.database.DataBaseHelper;
 import com.aeasycredit.order.models.Aeasyapp;
 import com.aeasycredit.order.models.RequestWrapper;
 import com.aeasycredit.order.models.Task;
+import com.aeasycredit.order.models.Task.ClientInfo;
 import com.aeasycredit.order.tool.AeaCamera;
 import com.aeasycredit.order.utils.AeaConstants;
 import com.aeasycredit.order.utils.AeaFileUtil;
@@ -22,18 +26,28 @@ import com.aeasycredit.order.volley.Request;
 import com.aeasycredit.order.volley.VolleyError;
 import com.aeasycredit.order.volley.toolbox.AeaJsonResquest;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.photoselector.ui.PhotoSelectorActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +59,7 @@ public class InspectTaskList extends BaseActivity {
     public static final int REQUEST_CODE_TASK_REPORT = 1002;
     public boolean requestCodeNoRefresh;
     int selectedId;
+    public Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,27 +85,31 @@ public class InspectTaskList extends BaseActivity {
                     String json = new Gson().toJson(task);
                     intent.putExtra(AeaConstants.EXTRA_TASK, json);
                 }
-                startActivityForResult(intent,REQUEST_CODE_TASK_REPORT);
+                startActivityForResult(intent, REQUEST_CODE_TASK_REPORT);
                 selectedId = position;
             }
         });
-//        requestList();
+        // requestList();
     }
 
     @Override
     protected void onResume() {
-        if(!requestCodeNoRefresh){
+        if (!requestCodeNoRefresh) {
             requestList();
+        } else {
+            if (mAdapter != null) {
+                mAdapter.notifyDataSetChanged();
+            }
         }
         super.onResume();
     }
-    
+
     @Override
     protected void onStop() {
         super.onStop();
         requestCodeNoRefresh = false;
     }
-    
+
     private void requestList() {
         // list = new ArrayList<Task>();
         // Task task = null;
@@ -146,10 +165,12 @@ public class InspectTaskList extends BaseActivity {
 
         class ViewHolder {
             public Button btCamera;
+            public Button btPreview;
             public TextView tvId;
             public TextView tvCustomerName;
             public TextView tvInspectDate;
             public TextView tvInspectAddress;
+            public ImageView ivImage;
         }
 
         @Override
@@ -170,6 +191,8 @@ public class InspectTaskList extends BaseActivity {
                         .findViewById(R.id.inspect_list_item_customer_inspect_date_value);
                 holder.tvInspectAddress = (TextView) v
                         .findViewById(R.id.inspect_list_item_customer_address);
+                holder.ivImage = (ImageView) v.findViewById(R.id.inspect_list_item_image);
+                holder.btPreview = (Button) v.findViewById(R.id.inspect_preview);
                 v.setTag(holder);
             } else {
                 holder = (ViewHolder) v.getTag();
@@ -177,7 +200,12 @@ public class InspectTaskList extends BaseActivity {
 
             final Task task = list.get(position);
             if (task != null) {
-                holder.tvCustomerName.setText(task.getClientName());
+//                holder.tvCustomerName.setText(task.getClientInfos());
+//                List<ClientInfo> info = task.getClientInfos();
+//                if(info != null && info.size() > 0){
+//                    ClientInfo clientInfo = info.get(0);
+//                    holder.tvCustomerName.setText(clientInfo.getClientName());
+//                }
                 holder.tvId.setText(task.getTaskid());
                 holder.tvInspectAddress.setText(task.getInvestigateAddr());
                 String date = task.getAppointInvestigateTime();
@@ -185,24 +213,92 @@ public class InspectTaskList extends BaseActivity {
                 try {
                     Date data = format.parse(date);
                     SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-                   date = format1.format(data);
+                    date = format1.format(data);
                 } catch (ParseException e) {
                     e.printStackTrace();
                     date = task.getAppointInvestigateTime();
                 }
                 holder.tvInspectDate.setText(date);
-                holder.btCamera.setOnClickListener(new View.OnClickListener() {
-                    
+                holder.btPreview.setOnClickListener(new OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
-                        AeaCamera.getInstance().initialize(InspectTaskList.this);
-                        AeaCamera.getInstance().openCamara(task.getTaskid());
+                        openPreView(task.getTaskid());
                     }
                 });
+                holder.btCamera.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // AeaCamera.getInstance().initialize(InspectTaskList.this);
+                        InspectTaskList.this.task = task;
+                        AeaCamera.getInstance().openCamara(InspectTaskList.this, task.getTaskid());
+                    }
+                });
+                holder.ivImage.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        openPreView(task.getTaskid());
+                    }
+                });
+                if (!bindImage(task.getTaskid(), holder.ivImage)) {
+                    holder.ivImage.setImageResource(R.drawable.photo);
+                }
             }
 
             return v;
         }
+    }
+
+    public void openPreView(String taskid) {
+        try {
+            String dir = Environment.getExternalStorageDirectory()
+                    + "/" + "aeasy" + "/" + taskid;
+            File file = new File(dir);
+            if (file != null && file.exists() && file.list() != null && file.list().length > 0) {
+                Intent intent = new Intent(InspectTaskList.this, PhotoSelectorActivity.class);
+                intent.putExtra(PhotoSelectorActivity.KEY_MAX, 15);
+                intent.putExtra(PhotoSelectorActivity.KEY_DIR, dir);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivityForResult(intent, AeaCamera.REQUEST_PICK_PHOTO);
+            } else {
+                Toast.makeText(this, "无照片", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean bindImage(String taskid, ImageView iv) {
+        File dir = new File(Environment.getExternalStorageDirectory()
+                + "/" + "aeasy" + "/" + taskid);
+        if (dir != null && dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            Arrays.sort(files, new Comparator<File>() {
+
+                @Override
+                public int compare(File f1, File f2) {
+                    long diff = f1.lastModified() - f2.lastModified();
+                    if (diff > 0)
+                        return -1;
+                    else if (diff == 0)
+                        return 0;
+                    else
+                        return 1;
+                }
+            });
+
+            if (files != null && files.length > 0) {
+                // file:///mnt/sdcard/image.png
+                String uri = "file:///" + files[0].getAbsolutePath();
+                Log.i(AeaConstants.TAG, "file uri = " + uri);
+                DisplayImageOptions options = DisplayImageOptions.createSimple();
+                ImageLoader.getInstance().displayImage(uri, iv, options);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void buildList(Aeasyapp response) {
@@ -251,30 +347,41 @@ public class InspectTaskList extends BaseActivity {
         stopLoadingStatus();
         Toast.makeText(this, getResources().getString(R.string.inspect_tasklist_request_fail),
                 Toast.LENGTH_SHORT).show();
+        mAdapter = null;
+        list = null;
+        listview.setAdapter(null);
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(AeaCamera.REQUEST_TAKE_PHOTO == requestCode){
+        if (AeaCamera.REQUEST_TAKE_PHOTO == requestCode) {
             requestCodeNoRefresh = true;
-        }else{
+            if (resultCode == Activity.RESULT_OK) {
+                AeaCamera.getInstance().openCamara(InspectTaskList.this, task.getTaskid());
+            }
+        } else if (AeaCamera.REQUEST_PICK_PHOTO == requestCode) {
+            requestCodeNoRefresh = true;
+        } else {
             requestCodeNoRefresh = false;
         }
-        AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
-        if(RESULT_OK ==  resultCode && REQUEST_CODE_TASK_REPORT == requestCode){
-            //删除数据库和本地图片
-//            if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID) && data.hasExtra(AeaConstants.REPORT_TYPE)){
-            if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID)){
+
+        // AeaCamera.getInstance().onActivityResult(requestCode, resultCode,
+        // data);
+        if (RESULT_OK == resultCode && REQUEST_CODE_TASK_REPORT == requestCode) {
+            // 删除数据库和本地图片
+            // if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID) &&
+            // data.hasExtra(AeaConstants.REPORT_TYPE)){
+            if (data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID)) {
                 String taskId = data.getExtras().getString(AeaConstants.REPORT_TASK_ID);
-//                int type = data.getExtras().getInt(AeaConstants.REPORT_TYPE);
+                // int type = data.getExtras().getInt(AeaConstants.REPORT_TYPE);
                 File dir = new File(Environment.getExternalStorageDirectory()
                         + "/" + AeaCamera.baselocalTempImgDir + "/" + taskId);
-                if(dir.exists()){
+                if (dir.exists()) {
                     AeaFileUtil.delFolder(dir.getAbsolutePath());
                 }
                 new DataBaseHelper(this).delRequestBodyById(taskId);
-                if(list != null && list.size() > selectedId){
+                if (list != null && list.size() > selectedId) {
                     list.remove(selectedId);
                     mAdapter.notifyDataSetChanged();
                 }

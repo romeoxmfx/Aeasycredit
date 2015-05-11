@@ -23,6 +23,7 @@ public class SqliteHelper extends SQLiteOpenHelper{
                 RequestBody.TASKID+ " varchar,"+
                 RequestBody.INVESTIGATETYPE+ " varchar,"+
                 RequestBody.INVESTIGATEENDTIME+ " varchar,"+
+                RequestBody.INVESTIGATESTARTTIME+ " varchar,"+
                 RequestBody.INVESTIGATEADDR+ " varchar,"+
                 RequestBody.CONTACTNAME+ " varchar,"+
                 RequestBody.CONTACTPHONE+ " varchar,"+

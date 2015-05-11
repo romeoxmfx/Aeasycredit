@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 public class InspectTaskDetail extends BaseActivity implements OnClickListener {
     TextView tvNum;
-    TextView tvCustomerName;
-    TextView tvCustomerPhone;
+    TextView tvCustomerInfo;
+//    TextView tvCustomerPhone;
     TextView tvAddress;
     TextView tvContact;
     TextView tvContackPhone;
@@ -42,8 +42,7 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
                 getResources().getDrawable(R.drawable.actionbar_background));
 
         tvNum = (TextView) findViewById(R.id.inspect_detail_num);
-        tvCustomerName = (TextView) findViewById(R.id.inspect_detail_customer_name);
-        tvCustomerPhone = (TextView) findViewById(R.id.inspect_detail_customer_phone);
+        tvCustomerInfo = (TextView) findViewById(R.id.inspect_detail_customer_info);
         tvAddress = (TextView) findViewById(R.id.inspect_detail_inspect_address);
         tvContact = (TextView) findViewById(R.id.inspect_detail_contacts);
         tvContackPhone = (TextView) findViewById(R.id.inspect_detail_contacts_phone);
@@ -71,8 +70,8 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
 
     private void bindData() {
         tvNum.setText(task.getLoanBillNumber());
-        tvCustomerName.setText(task.getClientName());
-        tvCustomerPhone.setText(task.getClientPhone());
+//        tvCustomerName.setText(task.getClientName());
+//        tvCustomerPhone.setText(task.getClientPhone());
         tvAddress.setText(task.getInvestigateAddr());
         ;
         tvContact.setText(task.getContactName());

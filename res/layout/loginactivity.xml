@@ -3,13 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_back"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.aeasycredit.order.activitys.HomeActivity" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/login_logo" />
+
+    <!--
+    TextView
         android:id="@+id/login_title_en"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,46 +33,59 @@
         android:layout_marginTop="10dp"
         android:text="@string/login_title_zh"
         android:textColor="#7d3c24"
-        android:textSize="28sp" />
+        android:textSize="28sp" /
+    -->
 
-    <EditText
-        android:id="@+id/login_name"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_title_zh"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:hint="@string/login_name"
-        android:lines="1"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@android:color/black"
-        android:textColorHint="#837975"
-        android:textSize="24sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/login_logo"
+        android:background="@color/login_bg" >
 
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@android:color/black"
-        android:textColorHint="#837975"
-        android:textSize="24sp" />
+        <EditText
+            android:id="@+id/login_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="85dp"
+            android:background="@drawable/login_input"
+            android:hint="@string/login_name"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="15dp"
+            android:singleLine="true"
+            android:textColor="#837975"
+            android:textColorHint="#BDBDBD"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/login_ok"
-        android:textSize="24sp" />
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/login_input"
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="15dp"
+            android:singleLine="true"
+            android:textColor="#837975"
+            android:textColorHint="#BDBDBD"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:text="@string/login_ok"
+            android:textColor="#fefefe"
+            android:background="@drawable/login_button_selector"
+            android:textSize="24sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

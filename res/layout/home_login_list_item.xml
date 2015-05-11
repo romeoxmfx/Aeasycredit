@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    tools:context="com.aeasycredit.order.activitys.HomeActivity"
+    android:background="@color/login_bg" >
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/home_login_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="#7d3c25"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/home_logout"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:text="退出"
+        android:textColor="#7d3c25"
+        android:textSize="16sp"
+        android:background="@drawable/login_button_selector" />
+
+</RelativeLayout>

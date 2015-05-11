@@ -87,6 +87,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     TextView tvOtherTitle;
     EditText etImageSize;
     TextView tvInvestigateEndTime;
+    TextView tvInvestigateStartTime;
     RadioButton rbIsHaveCompanyBoardYes;
     RadioButton rbIsHaveCompanyBoardNo;
     RadioButton rbIsHaveCompanyNameAtOfficeAreaYes;
@@ -102,6 +103,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     Boolean isHaveCompanyNameAtOfficeArea;
 
     DataBaseHelper dbHelper;
+    boolean doNotrecoverFiles = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +139,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             menu.clear();
         }else{
             menu.add("main")
-            .setIcon(R.drawable.btn_menu_save_selector)
+            .setIcon(R.drawable.save_selector)
             .setOnMenuItemClickListener(this)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -166,6 +168,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
         etSummary = (EditText) findViewById(R.id.inspect_report_contact_inspect_summary);
         etOther = (EditText) findViewById(R.id.inspect_report_contact_supplement);
         tvInvestigateEndTime = (TextView) findViewById(R.id.inspect_report_time);
+        tvInvestigateStartTime = (TextView) findViewById(R.id.inspect_report_start_time);
 
         tvCompanyTitle = (TextView) findViewById(R.id.inspect_report_contact_company_title);
         tvCompanyNatureTitle = (TextView) findViewById(R.id.inspect_report_contact_company_nature_title);
@@ -195,6 +198,8 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
         btBrowser.setOnClickListener(this);
         tvInvestigateEndTime.setOnClickListener(this);
         tvInvestigateEndTime.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        tvInvestigateStartTime.setOnClickListener(this);
+        tvInvestigateStartTime.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
 
         etIsHaveCompanyBoard.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -228,15 +233,22 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             llContactPhone.setVisibility(View.GONE);
             llContactPost.setVisibility(View.GONE);
             llInterviewContent.setVisibility(View.GONE);
+            tvCompanyTitle.setText(tvCompanyTitle.getText() + "：");
+            tvCompanyNatureTitle.setText(tvCompanyNatureTitle.getText() + "：");
+            tvStaffNumTitle.setText(tvStaffNumTitle.getText() + "：");
+            tvBusinessAreaTitle.setText(tvBusinessAreaTitle.getText() + "：");
+            tvIsHaveCompanyBoardTitle.setText(tvIsHaveCompanyBoardTitle.getText() + "：");
+            tvIsHaveCompanyNameAtOfficeAreaTitle.setText(tvIsHaveCompanyNameAtOfficeAreaTitle
+                    .getText() + "：");
         } else {
             llSummary.setVisibility(View.GONE);
-            tvCompanyTitle.setText(tvCompanyTitle.getText() + "(*)");
-            tvCompanyNatureTitle.setText(tvCompanyNatureTitle.getText() + "(*)");
-            tvStaffNumTitle.setText(tvStaffNumTitle.getText() + "(*)");
-            tvBusinessAreaTitle.setText(tvBusinessAreaTitle.getText() + "(*)");
-            tvIsHaveCompanyBoardTitle.setText(tvIsHaveCompanyBoardTitle.getText() + "(*)");
+            tvCompanyTitle.setText(tvCompanyTitle.getText() + "(*)：");
+            tvCompanyNatureTitle.setText(tvCompanyNatureTitle.getText() + "(*)：");
+            tvStaffNumTitle.setText(tvStaffNumTitle.getText() + "(*)：");
+            tvBusinessAreaTitle.setText(tvBusinessAreaTitle.getText() + "(*)：");
+            tvIsHaveCompanyBoardTitle.setText(tvIsHaveCompanyBoardTitle.getText() + "(*)：");
             tvIsHaveCompanyNameAtOfficeAreaTitle.setText(tvIsHaveCompanyNameAtOfficeAreaTitle
-                    .getText() + "(*)");
+                    .getText() + "(*)：");
             tvServiceContentTitle.setText(tvServiceContentTitle.getText() + "(*)");
             tvCompanyScaleTitle.setText(tvCompanyScaleTitle.getText() + "(*)");
             tvProductionApparatusTitle.setText(tvProductionApparatusTitle.getText() + "(*)");
@@ -319,6 +331,10 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     public boolean validate() {
         if(TextUtils.isEmpty(tvInvestigateEndTime.getText())){
             Toast.makeText(this, "请选择考察完成时间", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(TextUtils.isEmpty(tvInvestigateStartTime.getText())){
+            Toast.makeText(this, "请选择考察开始时间", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (RequestBody.INVESTIGATE_TYPE_PERCEIVE == reportType) {
@@ -404,6 +420,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
         RequestBody body = new RequestBody();
         body.setTaskid(taskId);
         body.setInvestigateEndTime(DateTimePickDialogUtil.convertDateStrToNum(tvInvestigateEndTime.getText().toString()));
+        body.setInvestigateStartTime(DateTimePickDialogUtil.convertDateStrToNum(tvInvestigateStartTime.getText().toString()));
         body.setInvestigateType(reportType + "");
         body.setInvestigateAddr(address);
         body.setContactName(getEditTextString(etContact));
@@ -483,6 +500,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                 RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(taskId, reportType);
                 if (body != null) {
                     tvInvestigateEndTime.setText(DateTimePickDialogUtil.convertNumToDateStr(body.getInvestigateEndTime()));
+                    tvInvestigateStartTime.setText(DateTimePickDialogUtil.convertNumToDateStr(body.getInvestigateStartTime()));
                     etContact.setText(body.getContactName());
                     etContactPhone.setText(body.getContactPhone());
                     etContactPosition.setText(body.getContactPost());
@@ -507,24 +525,27 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                     etInterviewContent.setText(body.getInterviewContent());
                     etSummary.setText(body.getSummary());
                     etOther.setText(body.getOther());
-                    try {
-                        if(!TextUtils.isEmpty(body.getFiles())){
-                            String[] files = body.getFiles().split(",");
-                            if(files != null && files.length > 0){
-                                photos = new ArrayList<PhotoModel>();
-                                PhotoModel model;
-                                for (String string : files) {
-                                    model = new PhotoModel();
-                                    model.setOriginalPath(string);
-                                    photos.add(model);
+                    if(!doNotrecoverFiles){
+                        try {
+                            if(!TextUtils.isEmpty(body.getFiles())){
+                                String[] files = body.getFiles().split(",");
+                                if(files != null && files.length > 0){
+                                    photos = new ArrayList<PhotoModel>();
+                                    PhotoModel model;
+                                    for (String string : files) {
+                                        model = new PhotoModel();
+                                        model.setOriginalPath(string);
+                                        photos.add(model);
+                                    }
+                                    String str = getResources().getString(R.string.inspect_report_photo_selected);
+                                    etPhotoUploder.setText(String.format(str, photos.size()));
                                 }
-                                String str = getResources().getString(R.string.inspect_report_photo_selected);
-                                etPhotoUploder.setText(String.format(str, photos.size()));
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    doNotrecoverFiles = false;
                 }
             }else{
                 Calendar calendar = Calendar.getInstance();
@@ -534,6 +555,8 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                 String dateTime = sdf.format(calendar.getTime());
                 
                 tvInvestigateEndTime.setText(dateTime);
+                
+                tvInvestigateStartTime.setText(dateTime);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -612,6 +635,16 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                 Intent intent = new Intent(this, PhotoSelectorActivity.class);
                 intent.putExtra(PhotoSelectorActivity.KEY_MAX, 15);
                 intent.putExtra(PhotoSelectorActivity.KEY_DIR, dir);
+                if(photos != null && photos.size() > 0){
+                    StringBuffer sb = new StringBuffer();
+                    for (PhotoModel photos : photos) {
+                        sb.append(photos.getOriginalPath())
+                          .append(",");
+                    }
+                    String seledtedFiles = sb.toString();
+                    seledtedFiles = seledtedFiles.substring(0,seledtedFiles.lastIndexOf(","));
+                    intent.putExtra(PhotoSelectorActivity.KEY_SELECTED, seledtedFiles);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivityForResult(intent, AeaCamera.REQUEST_PICK_PHOTO);
                 break;
@@ -623,6 +656,11 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                         this, tvInvestigateEndTime.getText().toString());  
                 dateTimePicKDialog.dateTimePicKDialog(tvInvestigateEndTime);
                 break;
+            case R.id.inspect_report_start_time:
+                DateTimePickDialogUtil dateTimePicKDialogStart = new DateTimePickDialogUtil(  
+                        this, tvInvestigateStartTime.getText().toString());  
+                dateTimePicKDialogStart.dateTimePicKDialog(tvInvestigateStartTime);
+                break;
             default:
                 break;
         }
@@ -631,19 +669,22 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
-            return;
-        if (requestCode == AeaCamera.REQUEST_PICK_PHOTO) {// selected image
+        if (resultCode == RESULT_OK && requestCode == AeaCamera.REQUEST_PICK_PHOTO){// selected image
+            doNotrecoverFiles = true;
             if (data != null && data.getExtras() != null) {
                 @SuppressWarnings("unchecked")
-                List<PhotoModel> photos = (List<PhotoModel>) data.getExtras().getSerializable(
+                List<PhotoModel> photosSel = (List<PhotoModel>) data.getExtras().getSerializable(
                         "photos");
-                if (photos != null && photos.size() > 0) {
-                    this.photos = photos;
+                if (photosSel != null && photosSel.size() > 0) {
+                    this.photos = photosSel;
                     String str = getResources().getString(R.string.inspect_report_photo_selected);
                     etPhotoUploder.setText(String.format(str, photos.size()));
                 }
             }
+        }else if(resultCode == RESULT_CANCELED && requestCode == AeaCamera.REQUEST_PICK_PHOTO){
+            doNotrecoverFiles = true;
+            this.photos = null;
+            etPhotoUploder.setText("");
         }
     }
 

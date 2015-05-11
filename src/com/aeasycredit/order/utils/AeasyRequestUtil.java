@@ -24,7 +24,7 @@ public class AeasyRequestUtil {
 
     public static String getLoginRequest(String name, String password) {
         RequestBody body = new RequestBody();
-        body.setUsercode(name);
+        body.setLoginname(name);
         body.setPassword(password);
         String requestJson = AeaConstants.POST_PAR_REQUEST + "=";
         // requestJson += "\"";
@@ -35,7 +35,7 @@ public class AeasyRequestUtil {
 
     public static String getCheckLoginRequest(String code, String uuid) {
         RequestBody body = new RequestBody();
-        body.setUsercode(code);
+        body.setLoginname(code);
         body.setUuid(uuid);
         String requestJson = AeaConstants.POST_PAR_REQUEST + "=";
         // requestJson += "\"";
@@ -189,7 +189,7 @@ public class AeasyRequestUtil {
 
     public static String getTaskListRequest(String userCode, String uuid) {
         RequestBody body = new RequestBody();
-        body.setUsercode(userCode);
+        body.setLoginname(userCode);
         body.setUuid(uuid);
         String requestJson = AeaConstants.POST_PAR_REQUEST + "=";
         // requestJson += "\"";

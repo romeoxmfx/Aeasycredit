@@ -55,6 +55,7 @@ public class PhotoSelectorActivity extends Activity implements
 
 	public static final int SINGLE_IMAGE = 1;
 	public static final String KEY_MAX = "key_max";
+	public static final String KEY_SELECTED = "key_selected";
 	public static final String KEY_DIR = "dir";
 	private int MAX_IMAGE;
 
@@ -74,6 +75,7 @@ public class PhotoSelectorActivity extends Activity implements
 	private ArrayList<PhotoModel> selected;
 	private TextView tvNumber;
 	private ArrayList<PhotoModel> photos;
+	private String selectedString;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,12 @@ public class PhotoSelectorActivity extends Activity implements
 
 		if (getIntent().getExtras() != null) {
 			MAX_IMAGE = getIntent().getIntExtra(KEY_MAX, 10);
+		}
+		
+		if(getIntent().getExtras() != null){
+		    if(getIntent().hasExtra(KEY_SELECTED)){
+		        selectedString = getIntent().getStringExtra(KEY_SELECTED);
+		    }
 		}
 
 		initImageLoader();
@@ -271,14 +279,16 @@ public class PhotoSelectorActivity extends Activity implements
 	/** 点击查看照片 */
 	public void onItemClick(int position) {
 		Bundle bundle = new Bundle();
-		if (tvAlbum.getText().toString().equals(RECCENT_PHOTO))
-			bundle.putInt("position", position - 1);
-		else
-			bundle.putInt("position", position);
-		
 		if(!TextUtils.isEmpty(dir)){
-		    bundle.putString(KEY_DIR, dir);
-		}
+            bundle.putString(KEY_DIR, dir);
+            bundle.putInt("position", position);
+        }else{
+            if (tvAlbum.getText().toString().equals(RECCENT_PHOTO))
+                bundle.putInt("position", position - 1);
+            else
+                bundle.putInt("position", position);
+        }
+		
 //		bundle.putString("album", tvAlbum.getText().toString());
 //		bundle.put("photos", photos);
 		CommonUtils.launchActivity(this, PhotoPreviewActivity.class, bundle);
@@ -357,10 +367,18 @@ public class PhotoSelectorActivity extends Activity implements
 		public void onPhotoLoaded(List<PhotoModel> photos) {
 		    if(photos != null && photos.size() > 0){
 //		        PhotoSelectorActivity.this.photos = photos;
+		        int i = 0;
 		        for (PhotoModel model : photos) {
 		            if (selected.contains(model)) {
 		                model.setChecked(true);
 		            }
+		            if(!TextUtils.isEmpty(selectedString) && selectedString.contains(model.getOriginalPath())){
+		                model.setChecked(true);
+		                if (!selected.contains(model))
+		                    selected.add(model);
+		                i++;
+		            }
+		            tvNumber.setText("(" + i + ")");
 		        }
 		        photoAdapter.update(photos);
 		        gvPhotos.smoothScrollToPosition(0); // 滚动到顶端

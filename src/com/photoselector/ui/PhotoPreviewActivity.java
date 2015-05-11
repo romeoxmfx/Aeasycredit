@@ -50,6 +50,7 @@ public class PhotoPreviewActivity extends BasePhotoPreviewActivity implements
             }
         } else if (extras.containsKey(PhotoSelectorActivity.KEY_DIR)) {
             String dir = extras.getString(PhotoSelectorActivity.KEY_DIR);
+            current = extras.getInt("position", 0);
             photoSelectorDomain.getSpecifyFile(this, dir);
         }
     }

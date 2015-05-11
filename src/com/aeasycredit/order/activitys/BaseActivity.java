@@ -22,6 +22,7 @@ public abstract class BaseActivity extends SherlockActivity implements Response.
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             mLoadingView = inflater.inflate(com.aeasycredit.order.R.layout.loading_mask,
                     null);
+            mLoadingView.setClickable(true);
             // mLoadingView.setLayoutParams(new
             // LayoutParams(LayoutParams.MATCH_PARENT,
             // LayoutParams.MATCH_PARENT));

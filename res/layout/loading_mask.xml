@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.aeasycredit.order.view.MaskLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/transparent" >
+    android:clickable="false">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/loading_body"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/main_back_mask"
         android:gravity="center"
         android:orientation="vertical" >
+        
+        <View
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:background="@android:color/transparent"
+            />
 
         <ProgressBar
+            android:layout_centerInParent="true"
             android:id="@+id/common_mask_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</com.aeasycredit.order.view.MaskLayout>

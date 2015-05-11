@@ -10,15 +10,18 @@
     <string name="login_password">请输入密码</string>
     <string name="login_ok">登陆</string>
     <string name="inspect_camera">照相</string>
+    <string name="inspect_preview">预览</string>
     <string name="inspect_task">考察任务</string>
     
-    <string name="inspect_list_item_customer_name">、客户姓名：</string>
+    <string name="inspect_list_item_customer_name">客户姓名：</string>
+    <string name="inspect_list_item_customer_info">客户信息：</string>
     <string name="inspect_list_item_inspect_date">预约考察日期：</string>
     <string name="inspect_list_item_address_title">考察地址：</string>
     
     <string name="inspect_task_detail">考察详情</string>
     <string name="inspect_task_detail_num">申请编号：</string>
     <string name="inspect_task_detail_customer_name">客户姓名：</string>
+    <string name="inspect_task_detail_customer_info">客户信息：</string>
     <string name="inspect_task_detail_customer_phone">客户联系电话：</string>
     <string name="inspect_task_detail_customer_address">考察地址：</string>
     <string name="inspect_task_detail_customer_contacts">联系人：</string>
@@ -41,6 +44,7 @@
     <string name="inspect_report_secert">新增暗访报告</string>
     <string name="inspect_report_perceive">新增明察报告</string>
     <string name="inspect_report_finishtime">考察完成时间(*)：</string>
+    <string name="inspect_report_starttime">考察开始时间(*)：</string>
     <string name="inspect_report_address">考察地址：</string>
     <string name="inspect_report_contact">联系人(*)：</string>
     <string name="inspect_report_contact_phone">联系人电话(*)：</string>
@@ -56,8 +60,10 @@
     <string name="inspect_report_contact_product_tool">生产器具</string>
     <string name="inspect_report_contact_stock">存货(成品,含半成品)</string>
     <string name="inspect_report_contact_interview_content">访谈内容(*)</string>
+    <string name="inspect_report_contact_interview_content_hint">访谈内容</string>
     <string name="inspect_report_contact_inspect_content">考察内容</string>
     <string name="inspect_report_contact_inspect_summary">考察总结(*)</string>
+    <string name="inspect_report_contact_inspect_summary_hint">考察总结</string>
     <string name="inspect_report_contact_supplement">其他补充事项</string>
     <string name="inspect_report_contact_upload_photo">上传照片：</string>
     <string name="inspect_report_browse">浏览</string>
