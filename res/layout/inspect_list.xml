@@ -4,14 +4,26 @@
     android:layout_height="match_parent"
     tools:context="com.aeasycredit.order.activitys.HomeActivity" >
 
-    <ListView
-        android:paddingTop="12dp"
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/inspect_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        ptr:ptrHeaderTextColor="#8f8f8f"
+        ptr:ptrHeaderSubTextColor="#8f8f8f"
+        android:background="@color/login_bg"
+        android:divider="@color/login_bg"
+        android:dividerHeight="8dp"
+        android:paddingTop="12dp" />
+
+    <!-- ListView
         android:id="@+id/inspect_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="8dp"
+        android:background="@color/login_bg"
         android:divider="@color/login_bg"
-        android:background="@color/login_bg">
-    </ListView>
+        android:dividerHeight="8dp"
+        android:paddingTop="12dp" >
+    </ListView -->
 
 </RelativeLayout>

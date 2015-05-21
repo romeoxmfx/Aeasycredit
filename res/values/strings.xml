@@ -79,10 +79,13 @@
     <string name="preview">Preview</string>
     <string name="recent_photos">Recent photos</string>
     <string name="sure">Sure</string>
+	<string name="select_all">Select all</string>
+	<string name="unselect_all">cancel all</string>
     <string name="select_photos">Select photos</string>
     <string name="back">Back</string>
     <string name="taking_pictures">Taking Pictures</string>
     <string name="max_img_limit_reached">Cannot select more than %d images</string>
+    <string name="common_fail">fail please retry</string>
 
     <color name="main_back">#ef8122</color>
     <color name="main_back_mask">#7fef8122</color>

@@ -24,8 +24,10 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.aeasycredit.order.models.RequestWrapper;
+import com.aeasycredit.order.utils.AeaConstants;
 import com.aeasycredit.order.volley.Response.ErrorListener;
 import com.aeasycredit.order.volley.Response.Listener;
 import com.aeasycredit.order.volley.toolbox.HttpHeaderParser;
@@ -113,6 +115,7 @@ public class MultiPartRequest extends Request<RequestWrapper> {
         try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+            Log.i(AeaConstants.TAG, jsonString);
             JSONObject jo = new JSONObject(jsonString);
             JSONObject joAea = jo.optJSONObject("aeasyapp");
             String resbody = joAea.optString("responseBody");

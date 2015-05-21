@@ -1,5 +1,6 @@
 package com.aeasycredit.order.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class Aeasyapp {
@@ -9,6 +10,7 @@ public class Aeasyapp {
     private String appVersion;
     private String loginname;
     @SerializedName("private")
+    @JsonProperty("private")
     private String mprivate;
     private String uuid;
     private RequestBody requestBody;

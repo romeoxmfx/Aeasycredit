@@ -66,19 +66,18 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:paddingBottom="12dp"
-            android:paddingLeft="2dp" >
+            android:paddingBottom="12dp">
 
             <LinearLayout
                 android:id="@+id/lltop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp" >
+                android:paddingTop="14dp" >
 
                 <TextView
                     android:id="@+id/inspect_list_item_id"
-                    android:layout_width="51dp"
+                    android:layout_width="4dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:focusable="true"
@@ -95,7 +94,6 @@
                     android:id="@+id/inspect_list_customer_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
                     android:text="@string/inspect_list_item_customer_name"
                     android:textColor="#8f8f8f"
                     android:textSize="14sp" />

@@ -38,7 +38,7 @@
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,15 +68,16 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:orientation="horizontal" >
+            android:layout_marginBottom="12dp" >
 
             <TextView
+                android:id="@+id/inspect_report_address_title"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:gravity="end"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -88,13 +89,12 @@
                 android:id="@+id/inspect_report_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/inspect_report_address_title"
                 android:ellipsize="end"
                 android:gravity="left"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/inspect_report_contact_layout"
@@ -145,6 +145,7 @@
                 android:id="@+id/inspect_report_contact_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="#8f8f8f"
@@ -331,11 +332,12 @@
                     android:textSize="13sp" />
 
                 <RadioButton
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/inspect_report_contact_company_has_logo_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:button="@drawable/choose_selector"
+                    android:checked="true"
                     android:text="@string/inspect_report_no"
                     android:textColor="#8f8f8f"
                     android:textSize="13sp" />
@@ -383,11 +385,12 @@
                     android:textSize="13sp" />
 
                 <RadioButton
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/inspect_report_contact_company_has_name_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:button="@drawable/choose_selector"
+                    android:checked="true"
                     android:text="@string/inspect_report_no"
                     android:textColor="#8f8f8f"
                     android:textSize="13sp" />
@@ -518,9 +521,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:maxLines="1"
+                android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:text="@string/inspect_report_contact_interview_content"
-                android:paddingLeft="10dp"
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
 
@@ -594,8 +597,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:orientation="horizontal" 
-            android:paddingRight="10dp">
+            android:orientation="horizontal"
+            android:paddingRight="10dp" >
 
             <TextView
                 android:layout_width="90dp"
@@ -619,10 +622,10 @@
                 android:textSize="13sp" />
 
             <Button
-                android:layout_gravity="center_vertical"
                 android:id="@+id/inspect_report_browser"
                 android:layout_width="80dp"
                 android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/image_browser_selector"
                 android:text="@string/inspect_report_browse"
                 android:textColor="@android:color/white"
@@ -638,7 +641,7 @@
             android:background="@drawable/image_browser_selector"
             android:text="@string/inspect_report_submit"
             android:textColor="@android:color/white"
-            android:textSize="13sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

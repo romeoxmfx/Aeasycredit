@@ -44,11 +44,24 @@
             android:id="@+id/tv_title_lh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bv_back_lh"
             android:text="@string/select_photos"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        
+        <Button
+            android:id="@+id/btn_right_select_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_right_lh"
+            android:background="@drawable/actionbar_background"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/select_all"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/layout_title_mini_textsize" />
 
         <Button
             android:id="@+id/btn_right_lh"
@@ -59,7 +72,6 @@
             android:layout_toLeftOf="@+id/tv_number"
             android:background="@drawable/actionbar_background"
             android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
             android:paddingRight="0dp"
             android:paddingTop="5dp"
             android:text="@string/sure"
@@ -123,7 +135,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/actionbar_background" >
 
-        <RelativeLayout
+        <!-- RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true" >
@@ -149,7 +161,7 @@
                 android:layout_toRightOf="@+id/tv_album_ar"
                 android:background="@drawable/ic_spinner_white"
                 android:scaleType="centerInside" />
-        </RelativeLayout>
+        </RelativeLayout -->
 
         <TextView
             android:id="@+id/tv_line_ar"

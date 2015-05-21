@@ -1,11 +1,9 @@
 
 package com.aeasycredit.order.activitys;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.aeasycredit.order.R;
@@ -16,7 +14,6 @@ import com.aeasycredit.order.utils.AeaFileUtil;
 import com.aeasycredit.order.utils.AeasySharedPreferencesUtil;
 import com.aeasycredit.order.volley.VolleyError;
 
-import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +29,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends BaseActivity {
     GridView gridView;
@@ -132,8 +128,8 @@ public class HomeActivity extends BaseActivity {
         AeasySharedPreferencesUtil.clearUUid(this);
         AeasySharedPreferencesUtil.clearUserCode(this);
         //删除所有照片
-        AeaFileUtil.delFolder(Environment.getExternalStorageDirectory()
-                + "/" + AeaCamera.baselocalTempImgDir);
+//        AeaFileUtil.delFolder(Environment.getExternalStorageDirectory()
+//                + "/" + AeaCamera.baselocalTempImgDir);
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

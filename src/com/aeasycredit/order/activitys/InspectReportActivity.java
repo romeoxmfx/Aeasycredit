@@ -99,8 +99,8 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     LinearLayout llInterviewContent;
     LinearLayout llSummary;
 
-    Boolean isHaveCompanyBoard;
-    Boolean isHaveCompanyNameAtOfficeArea;
+    Boolean isHaveCompanyBoard = false;
+    Boolean isHaveCompanyNameAtOfficeArea = false;
 
     DataBaseHelper dbHelper;
     boolean doNotrecoverFiles = false;
@@ -253,7 +253,7 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             tvCompanyScaleTitle.setText(tvCompanyScaleTitle.getText() + "(*)");
             tvProductionApparatusTitle.setText(tvProductionApparatusTitle.getText() + "(*)");
             tvInventoryTitle.setText(tvInventoryTitle.getText() + "(*)");
-            tvOtherTitle.setText(tvOtherTitle.getText() + "(*)");
+            tvOtherTitle.setText(tvOtherTitle.getText());
         }
     }
 
@@ -266,6 +266,8 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     @Override
     public void onErrorResponse(VolleyError error) {
         // 失败
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
         stopLoadingStatus();
         Toast.makeText(this, getResources().getString(R.string.inspect_report_submit_fail),
                 Toast.LENGTH_SHORT).show();
@@ -273,9 +275,16 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
 
     @Override
     public void onResponse(RequestWrapper response) {
-        stopLoadingStatus();
-        String code = AeasyRequestUtil.checkoutResponseCode(response.getAeasyapp()
-                .getResponseCode());
+//        super.onResponse(response);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        if(onResponseBase(response)){
+            return; 
+         }
+//        stopLoadingStatus();
+//        String code = AeasyRequestUtil.checkoutResponseCode(response.getAeasyapp()
+//                .getResponseCode());
+        String code = response.getAeasyapp().getResponseCode();
         if (AeaConstants.RESPONSE_CODE_200.equals(code)) {
             Toast.makeText(this,
                     getResources().getString(R.string.inspect_report_submit_succ),
@@ -289,18 +298,19 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             intent.putExtra(AeaConstants.REPORT_TYPE, reportType);
             setResult(RESULT_OK, intent);
             finish();
-        } else if (AeaConstants.RESPONSE_CODE_600.equals(code)) {
-            // 登陆超时跳转登陆界面
-            Toast.makeText(this,
-                    getResources().getString(R.string.inspect_checklogin_fail_timeout),
-                    Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.inspect_report_submit_fail),
-                    Toast.LENGTH_SHORT).show();
-        }
+        } 
+//        else if (AeaConstants.RESPONSE_CODE_600.equals(code)) {
+//            // 登陆超时跳转登陆界面
+//            Toast.makeText(this,
+//                    getResources().getString(R.string.inspect_checklogin_fail_timeout),
+//                    Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else {
+//            Toast.makeText(this, getResources().getString(R.string.inspect_report_submit_fail),
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public RequestBody mock() {
@@ -335,6 +345,10 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
         }
         if(TextUtils.isEmpty(tvInvestigateStartTime.getText())){
             Toast.makeText(this, "请选择考察开始时间", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(tvInvestigateEndTime.getText().toString().compareTo(tvInvestigateStartTime.getText().toString()) <= 0){
+            Toast.makeText(this, "考察完成时间必须大于考察开始时间", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (RequestBody.INVESTIGATE_TYPE_PERCEIVE == reportType) {
@@ -410,6 +424,32 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             if (TextUtils.isEmpty(etSummary.getText())) {
                 etSummary.requestFocus();
                 Toast.makeText(this, "请输入考察总结", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if(!validateLength(etContact,15,"联系人超过15个字符"))return false;
+        if(!validateLength(etContactPhone,11,"联系电话超过11位"))return false;
+        if(!validateLength(etContactPosition,15,"联系人职位超过15个字符"))return false;
+        if(!validateLength(etCompany,15,"公司名称超过15个字符"))return false;
+        if(!validateLength(etCompanyNature,25,"公司性质超过25个字符"))return false;
+        if(!validateLength(etStaffNum,6,"员工人数超过6位"))return false;
+        if(!validateLength(etBusinessArea,8,"营业用地面积超过8位"))return false;
+        if(!validateLength(etServiceContent,5000,"业务内容超过5000个字符"))return false;
+        if(!validateLength(etCompanyScale,5000,"公司规模超过5000个字符"))return false;
+        if(!validateLength(etProductionApparatus,5000,"生产器具超过5000个字符"))return false;
+        if(!validateLength(etInventory,5000,"存货超过5000个字符"))return false;
+        if(!validateLength(etInterviewContent,5000,"访谈内容超过5000个字符"))return false;
+        if(!validateLength(etSummary,5000,"考察总结超过5000个字符"))return false;
+        if(!validateLength(etOther,5000,"其他补充事项超过5000个字符"))return false;
+        return true;
+    }
+    
+    public boolean validateLength(EditText et, int length ,String text){
+        if(!TextUtils.isEmpty(et.getText())){
+            int len = et.getText().length();
+            if(len > length){
+                et.requestFocus();
+                Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -501,6 +541,24 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                 if (body != null) {
                     tvInvestigateEndTime.setText(DateTimePickDialogUtil.convertNumToDateStr(body.getInvestigateEndTime()));
                     tvInvestigateStartTime.setText(DateTimePickDialogUtil.convertNumToDateStr(body.getInvestigateStartTime()));
+                    if(TextUtils.isEmpty(tvInvestigateEndTime.getText())){
+                        Calendar calendar = Calendar.getInstance();
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+
+                        String dateTime = sdf.format(calendar.getTime());
+                        
+                        tvInvestigateEndTime.setText(dateTime);
+                    }
+                    if(TextUtils.isEmpty(tvInvestigateStartTime.getText())){
+                        Calendar calendar = Calendar.getInstance();
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+
+                        String dateTime = sdf.format(calendar.getTime());
+                        
+                        tvInvestigateStartTime.setText(dateTime);
+                    }
                     etContact.setText(body.getContactName());
                     etContactPhone.setText(body.getContactPhone());
                     etContactPosition.setText(body.getContactPost());
@@ -557,6 +615,9 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                 tvInvestigateEndTime.setText(dateTime);
                 
                 tvInvestigateStartTime.setText(dateTime);
+                
+                isHaveCompanyBoard = false;
+                isHaveCompanyNameAtOfficeArea = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -578,6 +639,8 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
     }
     
     public void submit() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
         startLoadingStatus();
 
         if (!validate()) {

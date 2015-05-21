@@ -6,7 +6,7 @@ import java.util.List;
 public class Task {
     private String taskid;
     private String loanBillNumber;
-//    private List<ClientInfo> clientInfoss;
+    private List<ClientInfo> clientInfos;
     private String clientName;
     private String clientPhone;
     private String investigateAddr;
@@ -96,13 +96,13 @@ public class Task {
         this.remarks = remarks;
     }
 
-//    public List<ClientInfo> getClientInfos() {
-//        return clientInfos;
-//    }
-//
-//    public void setClientInfos(List<ClientInfo> clientInfos) {
-//        this.clientInfos = clientInfos;
-//    }
+    public List<ClientInfo> getClientInfos() {
+        return clientInfos;
+    }
+
+    public void setClientInfos(List<ClientInfo> clientInfos) {
+        this.clientInfos = clientInfos;
+    }
 
     public static class ClientInfo {
 
@@ -134,5 +134,10 @@ public class Task {
             this.clientType = clientType;
         }
 
+        @Override
+        public String toString() {
+            // return super.toString();
+            return "客户类型:" + clientType + " 客户姓名:" + clientName + " 联系电话:" + clientPhone;
+        }
     }
 }

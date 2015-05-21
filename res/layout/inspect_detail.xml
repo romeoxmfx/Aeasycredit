@@ -1,282 +1,283 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_bg"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingTop="15dp"
-    android:paddingRight="10dp"
-    tools:context="com.aeasycredit.order.activitys.HomeActivity" >
+    android:background="@color/login_bg" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:layout_height="match_parent"
+        android:background="@color/login_bg"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        tools:context="com.aeasycredit.order.activitys.HomeActivity" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp" >
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_num"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_num"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_num"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/inspect_task_detail_customer_info"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_info"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_customer_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/inspect_task_detail_customer_info"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:textColor="#8f8f8f"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/inspect_detail_inspect_address_title"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_address"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_inspect_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/inspect_detail_inspect_address_title"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:textColor="#8f8f8f"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_contacts"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_contacts_phone"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_contacts_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_inspect_person"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_inspect_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_inspect_predate"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_detail_inspect_predate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/inspect_task_detail_inspect_remark_title"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/inspect_task_detail_customer_inspect_remark"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inspect_task_detail_inspect_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/inspect_task_detail_inspect_remark_title"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:textColor="#8f8f8f"
+                    android:textSize="14sp" />
+            </RelativeLayout>
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="37dp"
+            android:paddingRight="37dp" >
 
-            <TextView
-                android:id="@+id/inspect_task_detail_customer_info"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_info"
-                android:textColor="#8f8f8f"
+            <Button
+                android:id="@+id/inspect_detail_inspect_perceive_report"
+                android:layout_width="110dp"
+                android:layout_height="49dp"
+                android:background="@drawable/login_button_selector"
+                android:text="@string/inspect_task_detail_customer_inspect_perceive_report"
+                android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/inspect_detail_customer_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/inspect_task_detail_customer_info"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textColor="#8f8f8f"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/inspect_detail_inspect_address_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_address"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_inspect_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/inspect_detail_inspect_address_title"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text=""
-                android:textColor="#8f8f8f"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_contacts"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_contacts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_contacts_phone"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_contacts_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_inspect_person"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_inspect_person"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_inspect_predate"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_detail_inspect_predate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/inspect_task_detail_inspect_remark_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@string/inspect_task_detail_customer_inspect_remark"
-                android:textColor="#8f8f8f"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/inspect_task_detail_inspect_remark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/inspect_task_detail_inspect_remark_title"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text=""
-                android:textColor="#8f8f8f"
+            <Button
+                android:id="@+id/inspect_detail_inspect_secret_report"
+                android:layout_width="110dp"
+                android:layout_height="49dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/login_button_selector"
+                android:text="@string/inspect_task_detail_customer_inspect_secret_report"
+                android:textColor="@android:color/white"
                 android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:paddingLeft="37dp"
-        android:paddingRight="37dp" 
-        android:layout_marginTop="20dp">
-
-        <Button
-            android:id="@+id/inspect_detail_inspect_perceive_report"
-            android:layout_width="110dp"
-            android:layout_height="49dp"
-            android:background="@drawable/login_button_selector"
-            android:text="@string/inspect_task_detail_customer_inspect_perceive_report"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/inspect_detail_inspect_secret_report"
-            android:layout_width="110dp"
-            android:layout_height="49dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/login_button_selector"
-            android:text="@string/inspect_task_detail_customer_inspect_secret_report"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-</LinearLayout>
+</ScrollView>

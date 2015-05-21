@@ -1,16 +1,24 @@
 
 package com.aeasycredit.order.activitys;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.aeasycredit.order.R;
-import com.aeasycredit.order.models.Aeasyapp;
 import com.aeasycredit.order.models.RequestWrapper;
 import com.aeasycredit.order.models.Task;
 import com.aeasycredit.order.utils.AeaConstants;
 import com.aeasycredit.order.volley.VolleyError;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -60,7 +68,18 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
     private void receiveDetail(Intent intent) {
         if (intent.getExtras() != null && intent.getExtras().containsKey(AeaConstants.EXTRA_TASK)) {
             String json = intent.getExtras().getString(AeaConstants.EXTRA_TASK);
-            task = new Gson().fromJson(json, Task.class);
+//            task = new Gson().fromJson(json, Task.class);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+            try {
+                task = mapper.readValue(json, Task.class);
+            } catch (JsonParseException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             bindData();
         } else {
             Toast.makeText(this, getResources().getString(R.string.inspect_taskdetail_fail),
@@ -69,6 +88,20 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
     }
 
     private void bindData() {
+        String clientInfos = "";
+        StringBuffer sb = null;
+        if(task.getClientInfos() != null && task.getClientInfos().size() > 0){
+            sb = new StringBuffer();
+            for (Task.ClientInfo clientInfo : task.getClientInfos()) {
+                sb.append(""+clientInfo.toString())
+                .append(",");
+            }
+            clientInfos = sb.toString();
+            if(!TextUtils.isEmpty(clientInfos)){
+                clientInfos = clientInfos.substring(0,clientInfos.lastIndexOf(","));
+                tvCustomerInfo.setText(clientInfos);
+            }
+        }
         tvNum.setText(task.getLoanBillNumber());
 //        tvCustomerName.setText(task.getClientName());
 //        tvCustomerPhone.setText(task.getClientPhone());
@@ -78,7 +111,17 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
         tvContackPhone.setText(task.getContactPhone());
         ;
         tvInspectPerson.setText(task.getInvestigateName());
-        tvDate.setText(task.getAppointInvestigateTime());
+        String date = task.getAppointInvestigateTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        try {
+            Date data = format.parse(date);
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            date = format1.format(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            date = task.getAppointInvestigateTime();
+        }
+        tvDate.setText(date);
         tvRemak.setText(task.getRemarks());
     }
 
@@ -126,6 +169,7 @@ public class InspectTaskDetail extends BaseActivity implements OnClickListener {
                 Intent intent = new Intent();
                 intent.putExtra(AeaConstants.REPORT_TASK_ID, task.getTaskid());
                 setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }

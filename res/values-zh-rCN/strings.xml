@@ -77,10 +77,14 @@
     <string name="inspect_report_submit_fail">提交失败，请重试</string>
     <string name="inspect_report_submit_succ">提交成功</string>
     
+    <string name="common_fail">操作失败</string>
+    
     <string name="more_than_max">超过了上限</string>
     <string name="preview">预览</string>
     <string name="recent_photos">最近照片</string>
     <string name="sure">确定</string>
+    <string name="select_all">全选</string>
+    <string name="unselect_all">全不选</string>
     <string name="select_photos">选择照片</string>
     <string name="back">返回</string>
     <string name="taking_pictures">拍摄照片</string>
