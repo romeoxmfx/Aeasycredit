@@ -1,7 +1,9 @@
 
 package com.aeasycredit.order.activitys;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,8 +30,10 @@ import com.photoselector.ui.PhotoSelectorActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -647,11 +651,10 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             stopLoadingStatus();
             return;
         }
-
-        new Thread(new Runnable() {
-
+        
+        new AsyncTask<String, Integer, MultiPartRequest>() {
             @Override
-            public void run() {
+            protected MultiPartRequest doInBackground(String... params) {
                 String requestJson = AeasyRequestUtil.getSubmitRequest(buildBody(),
                         InspectReportActivity.this);
                 // MultipartEntity entity =
@@ -676,14 +679,53 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
                     for (PhotoModel photo : photos) {
                         ByteArrayBodyWrapper wrapper = new ByteArrayBodyWrapper();
                         wrapper.setFileName(new File(photo.getOriginalPath()).getName());
-                        wrapper.setBody(AeasyRequestUtil.compressImage(BitmapFactory
-                                .decodeFile(photo.getOriginalPath())));
+//                        wrapper.setBody(AeasyRequestUtil.compressImage(BitmapFactory
+//                                .decodeFile(photo.getOriginalPath())));
+                        wrapper.setBody(getPhotoByte(photo.getOriginalPath()));
                         request.addBiaryUpload(wrapper.getFileName(), wrapper);
                     }
                 }
-                MyApplication.mRequestQueue.add(request);
+                
+                return request;
             }
-        }).start();
+            
+            protected void onPostExecute(MultiPartRequest result) {
+                if(result != null){
+                    MyApplication.mRequestQueue.add(result);
+                }
+            };
+        }.execute();
+    }
+    
+    public byte[] getPhotoByte(String filePath){
+        Bitmap bitmap = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if(TextUtils.isEmpty(filePath)){
+                return null;
+            }
+            bitmap = BitmapFactory.decodeFile(filePath);
+            if(bitmap != null){
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] bytes = baos.toByteArray();
+                return bytes;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(bitmap != null){
+                bitmap.recycle();
+            }
+            if(baos != null){
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
     @Override

@@ -398,6 +398,7 @@ public class InspectTaskList extends BaseActivity implements OnRefreshListener<L
         if (AeaCamera.REQUEST_TAKE_PHOTO == requestCode) {
             requestCodeNoRefresh = true;
             if (resultCode == Activity.RESULT_OK) {
+                AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
                 AeaCamera.getInstance().openCamara(InspectTaskList.this, task.getTaskid());
             }
         } else if (AeaCamera.REQUEST_PICK_PHOTO == requestCode) {

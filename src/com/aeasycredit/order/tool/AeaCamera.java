@@ -1,8 +1,11 @@
 
 package com.aeasycredit.order.tool;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
@@ -41,6 +45,8 @@ public class AeaCamera implements MediaScannerConnectionClient {
     private MediaScannerConnection conn;
     private String openCameraTaskId;
 
+    private File f;
+
     public static AeaCamera getInstance() {
         if (instance == null) {
             instance = new AeaCamera();
@@ -59,7 +65,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
         isInit = true;
     }
 
-    public void openCamara(Context mContext,String taskId) {
+    public void openCamara(Context mContext, String taskId) {
         // 先验证手机是否有sdcard
         this.openCameraTaskId = taskId;
         String status = Environment.getExternalStorageState();
@@ -78,7 +84,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Format format = new SimpleDateFormat("yyyyMMddhhmmss");
                 String fileName = format.format(new Date()) + localTempImgFileName;
-                File f = new File(dir, fileName);// localTempImgDir和localTempImageFileName是自己定义的名字
+                f = new File(dir, fileName);
                 Uri u = Uri.fromFile(f);
                 intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, u);
@@ -90,6 +96,53 @@ public class AeaCamera implements MediaScannerConnectionClient {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 将图片image压缩成大小为 size的图片（size表示图片大小，单位是KB）
+     * 
+     * @param image 图片资源
+     * @param size 图片大小
+     * @return Bitmap
+     */
+    private Bitmap compressImage(Bitmap image, int size) {
+        Bitmap bitmap = null;
+        ByteArrayInputStream isBm = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            // 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+            image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            int options = 100;
+            // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            while (baos.toByteArray().length / 1024 > size) {
+                // 重置baos即清空baos
+                baos.reset();
+                // 每次都减少10
+                options -= 12;
+                // 这里压缩options%，把压缩后的数据存放到baos中
+                image.compress(Bitmap.CompressFormat.JPEG, options, baos);
+
+            }
+            // 把压缩后的数据baos存放到ByteArrayInputStream中
+            isBm = new ByteArrayInputStream(baos.toByteArray());
+            // 把ByteArrayInputStream数据生成图片
+            bitmap = BitmapFactory.decodeStream(isBm, null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                if(baos != null){
+                    baos.close();
+                }
+                if(isBm != null){
+                    isBm.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return bitmap;
     }
 
     public void choosePhoto(Context context, String taskId) {
@@ -130,33 +183,70 @@ public class AeaCamera implements MediaScannerConnectionClient {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (isInit == false) {
-            return;
-        }
+//        if (isInit == false) {
+//            return;
+//        }
         switch (requestCode) {
             case REQUEST_TAKE_PHOTO: {
                 if (resultCode == Activity.RESULT_OK) {
-//                    String filePath = Environment.getExternalStorageDirectory()
-//                            + "/" + baselocalTempImgDir + "/" + openCameraTaskId;
-//                    File f = new File(filePath);
-//                    try {
-//                        Uri u = Uri.parse(android.provider.MediaStore.Images.Media
-//                                .insertImage(mContext.getContentResolver(),
-//                                        f.getAbsolutePath(), null, null));
-//                        try {
-//                            Bitmap bm = MediaStore.Images.Media.getBitmap(
-//                                    mContext.getContentResolver(), u);
-//                            bm = rotateBitmap(bm, readPictureDegree(filePath));
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    } catch (FileNotFoundException e) {
-//                        e.printStackTrace();
-//                    }
-                    //继续拍照
-//                    openCamara(this.openCameraTaskId);
+                    // String filePath =
+                    // Environment.getExternalStorageDirectory()
+                    // + "/" + baselocalTempImgDir + "/" + openCameraTaskId;
+                    // File f = new File(filePath);
+                    // try {
+                    // Uri u =
+                    // Uri.parse(android.provider.MediaStore.Images.Media
+                    // .insertImage(mContext.getContentResolver(),
+                    // f.getAbsolutePath(), null, null));
+                    // try {
+                    // Bitmap bm = MediaStore.Images.Media.getBitmap(
+                    // mContext.getContentResolver(), u);
+                    // bm = rotateBitmap(bm, readPictureDegree(filePath));
+                    // } catch (IOException e) {
+                    // e.printStackTrace();
+                    // }
+                    // } catch (FileNotFoundException e) {
+                    // e.printStackTrace();
+                    // }
+                    // 继续拍照
+                    // openCamara(this.openCameraTaskId);
                     // Bitmap bm = (Bitmap) data.getExtras().get("data");
                     // jsCallBackPhotoBase64String(bm);
+                    FileOutputStream fos = null;
+                    Bitmap bitmap = null;
+                    try {
+                        if(f == null){
+                            return;
+                        }
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2;
+                        bitmap = BitmapFactory.decodeFile(f.getPath(),
+                                options);
+                        // 压缩图片
+                        bitmap = compressImage(bitmap,300);
+     
+                        if (bitmap != null) {
+                            // 保存图片
+                            fos = new FileOutputStream(f);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            bitmap.recycle();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally{
+                        try {
+                            if(fos != null){
+                                fos.close();
+                            }
+                            if(bitmap != null){
+                                bitmap.recycle();
+                            }
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        }
+                    }
+                    
                 }
                 break;
             }
@@ -169,7 +259,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
                             picturePath = imageUri.getPath();
                         } else {
                             String[] fileColumns = {
-                                MediaStore.Images.Media.DATA
+                                    MediaStore.Images.Media.DATA
                             };
                             Cursor c = mContext.getContentResolver().query(
                                     imageUri, fileColumns, null, null, null);
