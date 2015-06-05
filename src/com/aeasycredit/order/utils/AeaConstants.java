@@ -5,8 +5,8 @@ public class AeaConstants {
     
 //    public static final String REQUEST_URL = "http://14.118.132.74:9527/router/mobileapp/test/request.action";
 //    public static final String REQUEST_URL = "http://14.118.132.74:9527/router/mobileapp/app/request.action";
-//    public static final String REQUEST_URL = "http://api.aeasycredit.net:9527/router/mobileapp/test/request.action";
-    public static final String REQUEST_URL = "http://api.aeasycredit.net:9527/router/mobileapp/app/request.action";
+    public static final String REQUEST_URL = "http://api.aeasycredit.net:9527/router/mobileapp/test/request.action";
+//    public static final String REQUEST_URL = "http://api.aeasycredit.net:9527/router/mobileapp/app/request.action";
 //    public static final String REQUEST_URL_TEST = "http://192.168.1.104:8080/virgo/upload.do";
     public static final String VERSION = "v1.0";
     

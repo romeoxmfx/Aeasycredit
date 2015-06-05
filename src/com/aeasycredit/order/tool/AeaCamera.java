@@ -105,29 +105,36 @@ public class AeaCamera implements MediaScannerConnectionClient {
      * @param size 图片大小
      * @return Bitmap
      */
-    private Bitmap compressImage(Bitmap image, int size) {
-        Bitmap bitmap = null;
+    private void compressImage(Bitmap image, int size) {
+//        Bitmap bitmap = null;
         ByteArrayInputStream isBm = null;
         ByteArrayOutputStream baos = null;
+        FileOutputStream fos = null;
         try {
             baos = new ByteArrayOutputStream();
             // 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-            image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            image.compress(Bitmap.CompressFormat.JPEG, 90, baos);
             int options = 100;
             // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
             while (baos.toByteArray().length / 1024 > size) {
                 // 重置baos即清空baos
                 baos.reset();
                 // 每次都减少10
-                options -= 12;
+                options -= 10;
                 // 这里压缩options%，把压缩后的数据存放到baos中
                 image.compress(Bitmap.CompressFormat.JPEG, options, baos);
 
             }
             // 把压缩后的数据baos存放到ByteArrayInputStream中
-            isBm = new ByteArrayInputStream(baos.toByteArray());
+//            isBm = new ByteArrayInputStream(baos.toByteArray());
             // 把ByteArrayInputStream数据生成图片
-            bitmap = BitmapFactory.decodeStream(isBm, null, null);
+//            bitmap = BitmapFactory.decodeStream(isBm, null, null);
+//            ByteArrayOutputStream ba = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ba);
+//            int a = ba.toByteArray().length;
+            fos = new FileOutputStream(f);
+            fos.write(baos.toByteArray());
+            fos.flush();
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
@@ -138,11 +145,14 @@ public class AeaCamera implements MediaScannerConnectionClient {
                 if(isBm != null){
                     isBm.close();
                 }
+                if(fos != null){
+                    fos.close();
+                }
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
         }
-        return bitmap;
+//        return bitmap;
     }
 
     public void choosePhoto(Context context, String taskId) {
@@ -212,7 +222,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
                     // openCamara(this.openCameraTaskId);
                     // Bitmap bm = (Bitmap) data.getExtras().get("data");
                     // jsCallBackPhotoBase64String(bm);
-                    FileOutputStream fos = null;
+//                    FileOutputStream fos = null;
                     Bitmap bitmap = null;
                     try {
                         if(f == null){
@@ -220,25 +230,29 @@ public class AeaCamera implements MediaScannerConnectionClient {
                         }
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         options.inSampleSize = 2;
-                        bitmap = BitmapFactory.decodeFile(f.getPath(),
-                                options);
+                        bitmap = BitmapFactory.decodeFile(f.getPath(),options);
+//                        f.delete();
                         // 压缩图片
-                        bitmap = compressImage(bitmap,300);
-     
-                        if (bitmap != null) {
-                            // 保存图片
-                            fos = new FileOutputStream(f);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.flush();
-                            bitmap.recycle();
-                        }
+//                        bitmap = compressImage(bitmap,300);
+                        compressImage(bitmap,300);
+//                        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ba);
+//                        int a = ba.toByteArray().length;
+                        
+//                        if (bitmap != null) {
+//                            // 保存图片
+//                            fos = new FileOutputStream(f);
+//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                            fos.flush();
+////                            bitmap.recycle();
+//                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally{
                         try {
-                            if(fos != null){
-                                fos.close();
-                            }
+//                            if(fos != null){
+//                                fos.close();
+//                            }
                             if(bitmap != null){
                                 bitmap.recycle();
                             }

@@ -1,6 +1,7 @@
 
 package com.aeasycredit.order.application;
 
+import com.aeasycredit.order.utils.CustomCrashHandler;
 import com.aeasycredit.order.volley.MultiPartHttpStack;
 import com.aeasycredit.order.volley.RequestQueue;
 import com.aeasycredit.order.volley.toolbox.Volley;
@@ -24,6 +25,8 @@ public class MyApplication extends Application {
         PackageManager manager = getApplicationContext().getPackageManager();
         ImageLoaderConfiguration config = ImageLoaderConfiguration.createDefault(getApplicationContext());
         ImageLoader.getInstance().init(config);
+        CustomCrashHandler mCustomCrashHandler = CustomCrashHandler.getInstance();  
+        mCustomCrashHandler.setCustomCrashHanler(getApplicationContext());  
         try {
             PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
             appVersion = info.versionName;
