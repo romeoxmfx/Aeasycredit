@@ -395,127 +395,131 @@ public class InspectTaskList extends BaseActivity implements OnRefreshListener<L
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (AeaCamera.REQUEST_TAKE_PHOTO == requestCode) {
-            requestCodeNoRefresh = true;
-            if (resultCode == Activity.RESULT_OK) {
-                AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
-                if(task != null){
-                    AeaCamera.getInstance().openCamara(InspectTaskList.this, task.getTaskid());
+        try {
+            if (AeaCamera.REQUEST_TAKE_PHOTO == requestCode) {
+                requestCodeNoRefresh = true;
+                if (resultCode == Activity.RESULT_OK) {
+                    AeaCamera.getInstance().onActivityResult(requestCode, resultCode, data);
+                    if(task != null){
+                        AeaCamera.getInstance().openCamara(InspectTaskList.this, task.getTaskid());
+                    }
+                }
+            } else if (AeaCamera.REQUEST_PICK_PHOTO == requestCode) {
+                requestCodeNoRefresh = true;
+            } else {
+                requestCodeNoRefresh = false;
+            }
+
+            // AeaCamera.getInstance().onActivityResult(requestCode, resultCode,
+            // data);
+            if (RESULT_OK == resultCode && REQUEST_CODE_TASK_REPORT == requestCode) {
+                // 删除数据库和本地图片
+                // if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID) &&
+                // data.hasExtra(AeaConstants.REPORT_TYPE)){
+                if (data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID)) {
+                    String taskId = data.getExtras().getString(AeaConstants.REPORT_TASK_ID);
+                    // int type = data.getExtras().getInt(AeaConstants.REPORT_TYPE);
+                    File dir = new File(Environment.getExternalStorageDirectory()
+                            + "/" + AeaCamera.baselocalTempImgDir + "/" + taskId);
+                    if (dir.exists()) {
+                        AeaFileUtil.delFolder(dir.getAbsolutePath());
+                    }
+                    new DataBaseHelper(this).delRequestBodyById(taskId);
+                    if (list != null && list.size() > selectedId) {
+                        list.remove(selectedId);
+                        mAdapter.notifyDataSetChanged();
+                    }
                 }
             }
-        } else if (AeaCamera.REQUEST_PICK_PHOTO == requestCode) {
-            requestCodeNoRefresh = true;
-        } else {
-            requestCodeNoRefresh = false;
-        }
 
-        // AeaCamera.getInstance().onActivityResult(requestCode, resultCode,
-        // data);
-        if (RESULT_OK == resultCode && REQUEST_CODE_TASK_REPORT == requestCode) {
-            // 删除数据库和本地图片
-            // if(data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID) &&
-            // data.hasExtra(AeaConstants.REPORT_TYPE)){
-            if (data != null && data.hasExtra(AeaConstants.REPORT_TASK_ID)) {
-                String taskId = data.getExtras().getString(AeaConstants.REPORT_TASK_ID);
-                // int type = data.getExtras().getInt(AeaConstants.REPORT_TYPE);
-                File dir = new File(Environment.getExternalStorageDirectory()
-                        + "/" + AeaCamera.baselocalTempImgDir + "/" + taskId);
-                if (dir.exists()) {
-                    AeaFileUtil.delFolder(dir.getAbsolutePath());
+            if (RESULT_OK == resultCode && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
+                if (data != null && data.getExtras() != null) {
+                    @SuppressWarnings("unchecked")
+                    List<PhotoModel> photos = (List<PhotoModel>) data.getExtras().getSerializable(
+                            "photos");
+                    if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_PERCEIVE)) {
+                        // RequestBody body = dbHelper.updateRequestBody(body);
+                        RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
+                                AeaConstants.REPORT_PERCEIVE);
+                        if (photos != null && photos.size() > 0) {
+                            body.setImageSize(photos.size() + "");
+                            StringBuffer sb = new StringBuffer();
+                            for (PhotoModel photo : photos) {
+                                sb.append(photo.getOriginalPath())
+                                        .append(",");
+                            }
+                            String files = sb.toString();
+                            files = files.substring(0, files.lastIndexOf(","));
+                            body.setFiles(files);
+                            dbHelper.updateRequestBody(body);
+                        }
+                    } else {
+                        RequestBody body = new RequestBody();
+                        body.setTaskid(previewSelectedId);
+                        body.setInvestigateType(AeaConstants.REPORT_PERCEIVE + "");
+                        if (photos != null && photos.size() > 0) {
+                            body.setImageSize(photos.size() + "");
+                            StringBuffer sb = new StringBuffer();
+                            for (PhotoModel photo : photos) {
+                                sb.append(photo.getOriginalPath())
+                                        .append(",");
+                            }
+                            String files = sb.toString();
+                            files = files.substring(0, files.lastIndexOf(","));
+                            body.setFiles(files);
+                            dbHelper.insertRequestBody(body);
+                        }
+                    }
+                    if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_SECRET)) {
+                        RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
+                                AeaConstants.REPORT_SECRET);
+                        if (photos != null && photos.size() > 0) {
+                            body.setImageSize(photos.size() + "");
+                            StringBuffer sb = new StringBuffer();
+                            for (PhotoModel photo : photos) {
+                                sb.append(photo.getOriginalPath())
+                                        .append(",");
+                            }
+                            String files = sb.toString();
+                            files = files.substring(0, files.lastIndexOf(","));
+                            body.setFiles(files);
+                            dbHelper.updateRequestBody(body);
+                        }
+                    } else {
+                        RequestBody body = new RequestBody();
+                        body.setTaskid(previewSelectedId);
+                        body.setInvestigateType(AeaConstants.REPORT_SECRET + "");
+                        if (photos != null && photos.size() > 0) {
+                            body.setImageSize(photos.size() + "");
+                            StringBuffer sb = new StringBuffer();
+                            for (PhotoModel photo : photos) {
+                                sb.append(photo.getOriginalPath())
+                                        .append(",");
+                            }
+                            String files = sb.toString();
+                            files = files.substring(0, files.lastIndexOf(","));
+                            body.setFiles(files);
+                            dbHelper.insertRequestBody(body);
+                        }
+                    }
                 }
-                new DataBaseHelper(this).delRequestBodyById(taskId);
-                if (list != null && list.size() > selectedId) {
-                    list.remove(selectedId);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        }
-
-        if (RESULT_OK == resultCode && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
-            if (data != null && data.getExtras() != null) {
-                @SuppressWarnings("unchecked")
-                List<PhotoModel> photos = (List<PhotoModel>) data.getExtras().getSerializable(
-                        "photos");
+            } else if (resultCode == RESULT_CANCELED && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
                 if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_PERCEIVE)) {
                     // RequestBody body = dbHelper.updateRequestBody(body);
                     RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
                             AeaConstants.REPORT_PERCEIVE);
-                    if (photos != null && photos.size() > 0) {
-                        body.setImageSize(photos.size() + "");
-                        StringBuffer sb = new StringBuffer();
-                        for (PhotoModel photo : photos) {
-                            sb.append(photo.getOriginalPath())
-                                    .append(",");
-                        }
-                        String files = sb.toString();
-                        files = files.substring(0, files.lastIndexOf(","));
-                        body.setFiles(files);
-                        dbHelper.updateRequestBody(body);
-                    }
-                } else {
-                    RequestBody body = new RequestBody();
-                    body.setTaskid(previewSelectedId);
-                    body.setInvestigateType(AeaConstants.REPORT_PERCEIVE + "");
-                    if (photos != null && photos.size() > 0) {
-                        body.setImageSize(photos.size() + "");
-                        StringBuffer sb = new StringBuffer();
-                        for (PhotoModel photo : photos) {
-                            sb.append(photo.getOriginalPath())
-                                    .append(",");
-                        }
-                        String files = sb.toString();
-                        files = files.substring(0, files.lastIndexOf(","));
-                        body.setFiles(files);
-                        dbHelper.insertRequestBody(body);
-                    }
+                    body.setFiles(null);
+                    dbHelper.updateRequestBody(body);
                 }
                 if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_SECRET)) {
                     RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
                             AeaConstants.REPORT_SECRET);
-                    if (photos != null && photos.size() > 0) {
-                        body.setImageSize(photos.size() + "");
-                        StringBuffer sb = new StringBuffer();
-                        for (PhotoModel photo : photos) {
-                            sb.append(photo.getOriginalPath())
-                                    .append(",");
-                        }
-                        String files = sb.toString();
-                        files = files.substring(0, files.lastIndexOf(","));
-                        body.setFiles(files);
-                        dbHelper.updateRequestBody(body);
-                    }
-                } else {
-                    RequestBody body = new RequestBody();
-                    body.setTaskid(previewSelectedId);
-                    body.setInvestigateType(AeaConstants.REPORT_SECRET + "");
-                    if (photos != null && photos.size() > 0) {
-                        body.setImageSize(photos.size() + "");
-                        StringBuffer sb = new StringBuffer();
-                        for (PhotoModel photo : photos) {
-                            sb.append(photo.getOriginalPath())
-                                    .append(",");
-                        }
-                        String files = sb.toString();
-                        files = files.substring(0, files.lastIndexOf(","));
-                        body.setFiles(files);
-                        dbHelper.insertRequestBody(body);
-                    }
+                    body.setFiles(null);
+                    dbHelper.updateRequestBody(body);
                 }
             }
-        } else if (resultCode == RESULT_CANCELED && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
-            if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_PERCEIVE)) {
-                // RequestBody body = dbHelper.updateRequestBody(body);
-                RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
-                        AeaConstants.REPORT_PERCEIVE);
-                body.setFiles(null);
-                dbHelper.updateRequestBody(body);
-            }
-            if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_SECRET)) {
-                RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
-                        AeaConstants.REPORT_SECRET);
-                body.setFiles(null);
-                dbHelper.updateRequestBody(body);
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

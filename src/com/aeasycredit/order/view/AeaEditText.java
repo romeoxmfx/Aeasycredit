@@ -6,7 +6,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 public class AeaEditText extends EditText {
 
@@ -77,12 +79,22 @@ public class AeaEditText extends EditText {
                 // }else {
                 // v.getParent().getParent().getParent().requestDisallowInterceptTouchEvent(false);
                 // }
+                ViewGroup parent = (ViewGroup) (v.getParent().getParent().getParent());
                 if (v.hasFocus()) {
-                    v.getParent().getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                    parent.requestDisallowInterceptTouchEvent(true);
+                    if(parent != null && parent instanceof ScrollView){
+                        ScrollView scroll = (ScrollView) parent;
+                        scroll.scrollTo(0, 10000);
+                    }
                 }
                 switch (event.getAction() & MotionEvent.ACTION_MASK) {
                     case MotionEvent.ACTION_UP:
-                        v.getParent().requestDisallowInterceptTouchEvent(false);
+//                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        parent.requestDisallowInterceptTouchEvent(false);
+                        if(parent != null && parent instanceof ScrollView){
+                            ScrollView scroll = (ScrollView) parent;
+                            scroll.scrollTo(0, 10000);
+                        }
                         break;
                 }
                 return false;
