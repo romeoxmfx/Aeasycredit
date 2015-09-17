@@ -22,12 +22,12 @@
                 android:gravity="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@string/inspect_report_finishtime"
+                android:text="@string/inspect_report_starttime"
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/inspect_report_time"
+                android:id="@+id/inspect_report_start_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -38,7 +38,7 @@
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
         </LinearLayout>
-
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,12 +51,12 @@
                 android:gravity="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@string/inspect_report_starttime"
+                android:text="@string/inspect_report_finishtime"
                 android:textColor="#8f8f8f"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/inspect_report_start_time"
+                android:id="@+id/inspect_report_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -255,6 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inspect_report_contact_person"
+                android:textColorHint="#cfcfcf"
                 android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -284,6 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inspect_report_contact_centiare"
+                android:textColorHint="#cfcfcf"
                 android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"

@@ -8,7 +8,7 @@
     <string name="login_title_zh">亚馨信贷</string>
     <string name="login_name">请输入用户名</string>
     <string name="login_password">请输入密码</string>
-    <string name="login_ok">登陆</string>
+    <string name="login_ok">登录</string>
     <string name="inspect_camera">照相</string>
     <string name="inspect_preview">预览</string>
     <string name="inspect_task">考察任务</string>
@@ -81,7 +81,8 @@
     
     <string name="more_than_max">超过了上限</string>
     <string name="preview">预览</string>
-    <string name="recent_photos">最近照片</string>
+    <string name="recent_photos">工单照片</string>
+    <string name="system_photos">系统相册</string>
     <string name="sure">确定</string>
     <string name="select_all">全选</string>
     <string name="unselect_all">全不选</string>

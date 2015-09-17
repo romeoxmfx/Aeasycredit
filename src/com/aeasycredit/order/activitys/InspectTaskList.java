@@ -503,21 +503,22 @@ public class InspectTaskList extends BaseActivity implements OnRefreshListener<L
                         }
                     }
                 }
-            } else if (resultCode == RESULT_CANCELED && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
-                if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_PERCEIVE)) {
-                    // RequestBody body = dbHelper.updateRequestBody(body);
-                    RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
-                            AeaConstants.REPORT_PERCEIVE);
-                    body.setFiles(null);
-                    dbHelper.updateRequestBody(body);
-                }
-                if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_SECRET)) {
-                    RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
-                            AeaConstants.REPORT_SECRET);
-                    body.setFiles(null);
-                    dbHelper.updateRequestBody(body);
-                }
-            }
+            } 
+//            else if (resultCode == RESULT_CANCELED && requestCode == AeaCamera.REQUEST_PICK_PHOTO) {
+//                if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_PERCEIVE)) {
+//                    // RequestBody body = dbHelper.updateRequestBody(body);
+//                    RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
+//                            AeaConstants.REPORT_PERCEIVE);
+//                    body.setFiles(null);
+//                    dbHelper.updateRequestBody(body);
+//                }
+//                if (dbHelper.haveRequestBody(previewSelectedId, AeaConstants.REPORT_SECRET)) {
+//                    RequestBody body = dbHelper.getRequestBodyByTaskIdAndType(previewSelectedId,
+//                            AeaConstants.REPORT_SECRET);
+//                    body.setFiles(null);
+//                    dbHelper.updateRequestBody(body);
+//                }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

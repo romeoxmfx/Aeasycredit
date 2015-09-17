@@ -98,7 +98,7 @@ public class AeaCamera implements MediaScannerConnectionClient {
             }
         }
     }
-
+    
     /**
      * 将图片image压缩成大小为 size的图片（size表示图片大小，单位是KB）
      * 

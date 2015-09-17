@@ -68,8 +68,8 @@ public class PhotoSelectorActivity extends Activity implements
     private GridView gvPhotos;
     private ListView lvAblum;
     private Button btnOk, btSelectAll;
-    // private TextView tvAlbum, tvPreview, tvTitle;
-    private TextView tvPreview, tvTitle;
+    private TextView tvAlbum, tvPreview, tvTitle;
+    // private TextView tvPreview, tvTitle;
     private PhotoSelectorDomain photoSelectorDomain;
     private PhotoSelectorAdapter photoAdapter;
     private AlbumAdapter albumAdapter;
@@ -107,13 +107,13 @@ public class PhotoSelectorActivity extends Activity implements
         lvAblum = (ListView) findViewById(R.id.lv_ablum_ar);
         btnOk = (Button) findViewById(R.id.btn_right_lh);
         btSelectAll = (Button) findViewById(R.id.btn_right_select_all);
-        // tvAlbum = (TextView) findViewById(R.id.tv_album_ar);
+        tvAlbum = (TextView) findViewById(R.id.tv_album_ar);
         tvPreview = (TextView) findViewById(R.id.tv_preview_ar);
         layoutAlbum = (RelativeLayout) findViewById(R.id.layout_album_ar);
         tvNumber = (TextView) findViewById(R.id.tv_number);
 
         btnOk.setOnClickListener(this);
-        // tvAlbum.setOnClickListener(this);
+        tvAlbum.setOnClickListener(this);
         tvPreview.setOnClickListener(this);
 
         photoAdapter = new PhotoSelectorAdapter(getApplicationContext(),
@@ -134,8 +134,9 @@ public class PhotoSelectorActivity extends Activity implements
             photoSelectorDomain.getSpecifyFile(reccentListener, dir);// 获取指定文件夹
         } else {
             photoSelectorDomain.getReccent(reccentListener); // 更新最近照片
-            photoSelectorDomain.updateAlbum(albumListener); // 跟新相册信息
+            // photoSelectorDomain.updateAlbum(albumListener); // 跟新相册信息
         }
+        photoSelectorDomain.updateAlbum(albumListener);
     }
 
     private void initImageLoader() {
@@ -184,39 +185,43 @@ public class PhotoSelectorActivity extends Activity implements
     public void onClick(View v) {
         if (v.getId() == R.id.btn_right_lh)
             ok(); // 选完照片
-        // else if (v.getId() == R.id.tv_album_ar)
-        // album();
+        else if (v.getId() == R.id.tv_album_ar)
+            album();
         else if (v.getId() == R.id.tv_preview_ar)
             priview();
         else if (v.getId() == R.id.tv_camera_vc)
             catchPicture();
         else if (v.getId() == R.id.bv_back_lh)
-            finish();
+            if (layoutAlbum.getVisibility() == View.VISIBLE) {
+                hideAlbum();
+            }else{
+                finish();
+            }
         else if (v.getId() == R.id.btn_right_select_all)
             selectAll();
     }
 
     public void selectAll() {
-        if(photos != null && photos.size() > 0){
+        if (photos != null && photos.size() > 0) {
             if (selected.size() < photos.size()) {
                 for (PhotoModel photo : photos) {
                     photo.setChecked(true);
                     if (!selected.contains(photo))
                         selected.add(photo);
                 }
-            }else{
+            } else {
                 for (PhotoModel photo : photos) {
                     photo.setChecked(false);
                 }
                 selected.clear();
             }
-            
+
             tvNumber.setText("(" + selected.size() + ")");
 
             if (selected.isEmpty()) {
                 tvPreview.setEnabled(false);
                 tvPreview.setText(getString(R.string.preview));
-            }else{
+            } else {
                 tvPreview.setEnabled(true);
             }
 
@@ -380,12 +385,13 @@ public class PhotoSelectorActivity extends Activity implements
         }
         albumAdapter.notifyDataSetChanged();
         hideAlbum();
-        // tvAlbum.setText(current.getName());
-        // tvTitle.setText(current.getName());
+        tvAlbum.setText(current.getName());
+        tvTitle.setText(current.getName());
 
         // 更新照片列表
         if (current.getName().equals(RECCENT_PHOTO))
-            photoSelectorDomain.getReccent(reccentListener);
+            // photoSelectorDomain.getReccent(reccentListener);
+            photoSelectorDomain.getSpecifyFile(reccentListener, dir);// 获取指定文件夹
         else
             photoSelectorDomain.getAlbum(current.getName(), reccentListener); // 获取选中相册的照片
     }
@@ -427,7 +433,7 @@ public class PhotoSelectorActivity extends Activity implements
                     tvNumber.setText("(" + i + ")");
                 }
                 photoAdapter.update(photos);
-                if(!selected.isEmpty()){
+                if (!selected.isEmpty()) {
                     tvPreview.setEnabled(true);
                 }
                 gvPhotos.smoothScrollToPosition(0); // 滚动到顶端
