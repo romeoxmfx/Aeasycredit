@@ -89,18 +89,27 @@ public class PhotoSelectorActivity extends Activity implements
         if (getIntent().getExtras() != null) {
             MAX_IMAGE = getIntent().getIntExtra(KEY_MAX, 10);
         }
+        
+        selected = new ArrayList<PhotoModel>();
 
         if (getIntent().getExtras() != null) {
             if (getIntent().hasExtra(KEY_SELECTED)) {
                 selectedString = getIntent().getStringExtra(KEY_SELECTED);
+                if(!TextUtils.isEmpty(selectedString)){
+                    String[] strs =  selectedString.split(",");
+                    for (String string : strs) {
+                        PhotoModel model = new PhotoModel();
+                        model.setChecked(true);
+                        model.setOriginalPath(string);
+                        selected.add(model);
+                    }
+                }
             }
         }
 
         initImageLoader();
 
         photoSelectorDomain = new PhotoSelectorDomain(getApplicationContext());
-
-        selected = new ArrayList<PhotoModel>();
 
         tvTitle = (TextView) findViewById(R.id.tv_title_lh);
         gvPhotos = (GridView) findViewById(R.id.gv_photos_ar);
@@ -365,6 +374,15 @@ public class PhotoSelectorActivity extends Activity implements
 
     @Override
     public void onBackPressed() {
+        if (selected.isEmpty()) {
+            setResult(RESULT_CANCELED);
+        } else {
+            Intent data = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("photos", selected);
+            data.putExtras(bundle);
+            setResult(RESULT_OK, data);
+        }
         if (layoutAlbum.getVisibility() == View.VISIBLE) {
             hideAlbum();
         } else
