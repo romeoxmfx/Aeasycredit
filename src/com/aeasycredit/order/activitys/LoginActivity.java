@@ -1,6 +1,9 @@
 
 package com.aeasycredit.order.activitys;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aeasycredit.order.R;
 import com.aeasycredit.order.application.MyApplication;
 import com.aeasycredit.order.models.RequestWrapper;
@@ -14,16 +17,19 @@ import com.aeasycredit.order.volley.toolbox.AeaJsonResquest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends BaseActivity {
     Button btLogin;
-    EditText etName;
-    EditText etPassword;
+    AutoCompleteTextView etName;
+    AutoCompleteTextView etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +37,10 @@ public class LoginActivity extends BaseActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.loginactivity);
         btLogin = (Button) findViewById(R.id.login_button);
-        etName = (EditText) findViewById(R.id.login_name);
-        etPassword = (EditText) findViewById(R.id.login_password);
-
+        etName = (AutoCompleteTextView) findViewById(R.id.login_name);
+        etPassword = (AutoCompleteTextView) findViewById(R.id.login_password);
+        createLoginUserAdapter();
+        
         btLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,6 +57,25 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+    }
+    
+    private void createLoginUserAdapter(){
+        String loginUsers = AeasySharedPreferencesUtil.getLoginUsers(this);
+        try {
+            if(!TextUtils.isEmpty(loginUsers)){
+                String[] users = loginUsers.split(",");
+                if(users != null && users.length > 0){
+                    List<String> list = new ArrayList<String>();
+                    for (String user : users) {
+                        list.add(user);
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+                    etName.setAdapter(adapter);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void doLogin(String name, String password) {
@@ -85,6 +111,8 @@ public class LoginActivity extends BaseActivity {
             // saveUuid
             AeasySharedPreferencesUtil.saveUuid(this, response.getAeasyapp().getResponseBody()
                     .getUuid());
+            //saveLoginUser
+            AeasySharedPreferencesUtil.saveLoginUsers(this, etName.getText().toString());
             AeasySharedPreferencesUtil.saveUserCode(this, etName.getText().toString());
             Toast.makeText(this, getResources().getString(R.string.inspect_login_success),
                     Toast.LENGTH_SHORT).show();

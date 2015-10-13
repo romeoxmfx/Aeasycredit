@@ -4,11 +4,13 @@ package com.aeasycredit.order.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.text.TextUtils;
 
 public class AeasySharedPreferencesUtil {
     public static final String SHARED_FILE_NAME = "aeasy";
     public static final String UUID = "uuid";
     public static final String USER_CODE = "usercode";
+    public static final String LOGIN_USERS = "login_users";
     
     public static void saveUuid(Context context, String uuid) {
         try {
@@ -74,5 +76,34 @@ public class AeasySharedPreferencesUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void saveLoginUsers(Context context,String userid){
+        try {
+            SharedPreferences sp = context.getSharedPreferences(SHARED_FILE_NAME, 0);
+            //获取之前的用户
+            String loginUsers = getLoginUsers(context);
+            if(!TextUtils.isEmpty(loginUsers) && !loginUsers.contains(userid)){
+                loginUsers = loginUsers + "," + userid;
+            }else{
+                loginUsers = userid;
+            }
+            Editor editor = sp.edit();
+            editor.putString(LOGIN_USERS, loginUsers);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static String getLoginUsers(Context context){
+        try {
+            SharedPreferences sp = context.getSharedPreferences(SHARED_FILE_NAME, 0);
+            String loginUsers = sp.getString(LOGIN_USERS, "");
+            return loginUsers;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

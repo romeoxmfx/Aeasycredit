@@ -42,7 +42,7 @@
         android:layout_below="@id/login_logo"
         android:background="@color/login_bg" >
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/login_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:textColorHint="#BDBDBD"
             android:textSize="18sp" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/login_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

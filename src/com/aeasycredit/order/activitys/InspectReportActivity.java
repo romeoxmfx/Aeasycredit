@@ -469,6 +469,12 @@ public class InspectReportActivity extends BaseActivity implements OnClickListen
             return false;
         if (!validateLength(etOther, 5000, "其他补充事项超过5000个字符"))
             return false;
+        if(photos != null && photos.size() > 0){
+            if(photos.size() > 100){
+                Toast.makeText(this, "上传图片数不能大于100张", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
         return true;
     }
 
